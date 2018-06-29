@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<componentregistry>
+  <adapters />
+  <subscribers />
+  <utilities>
+    <utility
+      interface="collective.privacy.interfaces.IPrivacyTool"
+      object="portal_privacy"/>
+  </utilities>
+</componentregistry>

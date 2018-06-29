@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<object name="portal_skins" meta_type="Plone Skins Tool">
+ <object name="privacy_overrides" meta_type="Filesystem Directory View"
+         directory="collective.privacy:skins/privacy_overrides"/>
+  <skin-path name="*">
+    <layer name="privacy_overrides" insert-after="custom"/>
+  </skin-path>
+</object>

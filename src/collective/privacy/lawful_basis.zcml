@@ -1,0 +1,42 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:gdpr="http://namespaces.plone.org/gdpr"
+    i18n_domain="collective.privacy">
+
+  <utility
+    component="collective.privacy.lawful_basis.contract"
+    provides="collective.privacy.interfaces.ILawfulBasis"
+    name="contract"
+    />
+
+  <utility
+    component="collective.privacy.lawful_basis.consent"
+    provides="collective.privacy.interfaces.ILawfulBasis"
+    name="consent"
+    />
+
+  <utility
+    component="collective.privacy.lawful_basis.legal_obligation"
+    provides="collective.privacy.interfaces.ILawfulBasis"
+    name="legal_obligation"
+    />
+
+  <utility
+    component="collective.privacy.lawful_basis.legitimate_interest"
+    provides="collective.privacy.interfaces.ILawfulBasis"
+    name="legitimate_interest"
+    />
+
+  <utility
+    component="collective.privacy.lawful_basis.public_task"
+    provides="collective.privacy.interfaces.ILawfulBasis"
+    name="public_task"
+    />
+  
+  <utility
+    component="collective.privacy.lawful_basis.vital_interest"
+    provides="collective.privacy.interfaces.ILawfulBasis"
+    name="vital_interest"
+    />
+
+</configure>

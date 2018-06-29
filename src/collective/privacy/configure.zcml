@@ -3,6 +3,9 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:gdpr="http://namespaces.plone.org/gdpr"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
     i18n_domain="collective.privacy">
 
   <i18n:registerTranslations directory="locales" />
@@ -16,8 +19,22 @@
   <include package=".browser" />
 
   <include file="permissions.zcml" />
-
   <include file="upgrades.zcml" />
+
+  <include file="lawful_basis.zcml" />
+  <include package=".plone_core" />
+
+  <gdpr:data_use_category
+    name="gdpr_cookies"
+    title="Cookies to record your privacy preferences"
+    description="These store if you've given consent or objected to various
+                 uses of your data. We need to store these to comply with data
+                 protection law."
+    legal_basis="legal_obligation"
+    discriminator="collective.privacy.identifiers.NoChoiceIdentifier"
+    storage="collective.privacy.storage.DatabaseStorage"
+    />
+
 
   <genericsetup:registerProfile
       name="default"
@@ -42,6 +59,14 @@
       name="collective.privacy-hiddenprofiles"
       />
 
-  <!-- -*- extra stuff goes here -*- -->
+  <five:registerClass
+      class=".tool.ProcessingReason"
+      meta_type="Processing Reason"
+      addview="addProcessingReason.html"
+      permission="cmf.ManagePortal"
+      global="False"
+      />
+
+  <cmf:registerDirectory name="skins" directory="skins" recursive="True" />
 
 </configure>

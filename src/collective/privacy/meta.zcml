@@ -1,0 +1,17 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:meta="http://namespaces.zope.org/meta">
+ 
+  <meta:provides feature="gdpr" />
+
+  <meta:directives namespace="http://namespaces.plone.org/gdpr">
+
+    <meta:directive
+        name="data_use_category"
+        schema="collective.privacy.zcml.IDataUseCategory"
+        handler="collective.privacy.zcml.data_use_category"
+        />
+
+  </meta:directives>
+
+</configure>
