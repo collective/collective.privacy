@@ -1,5 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:gdpr="http://namespaces.plone.org/gdpr"
     i18n_domain="collective.privacy">
 
@@ -24,7 +25,15 @@
     storage="collective.privacy.storage.CookieStorage"
     />
 
-  <gdpr:data_use_category
+  <browser:viewlet
+      name="plone.analytics"
+      manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+      class=".webstats_js.PrivacyRespectingAnalyticsViewlet"
+      layer="collective.privacy.interfaces.ICollectivePrivacyLayer"
+      permission="zope2.View"
+      />
+
+  <!--gdpr:data_use_category
     name="enhanced_analytics"
     title="Enhanced analytics"
     description="Analytics that are used to improve the website that involve
@@ -32,7 +41,7 @@
     legal_basis="consent"
     discriminator="collective.privacy.identifiers.CookieIdentifier"
     storage="collective.privacy.storage.CookieStorage"
-    />
+    /-->
 
 
   <!--adapter

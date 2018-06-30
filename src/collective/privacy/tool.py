@@ -21,10 +21,19 @@ IP_NAMESPACE = uuid.UUID('45865cac-1e4f-46d3-8e3e-1c277db76f3e')
 
 class ProcessingReason(SimpleItem):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, id, *args, **kwargs):
         super(ProcessingReason, self).__init__(*args, **kwargs)
+        self.id = id
         self.consented = OIBTree()
         self.objected = OIBTree()
+
+    def __repr__(self):
+        return "<ProcessingReason at %s>" % '/'.join(self.absolute_path())
+
+    def getId(self):
+        return self.id
+
+
 
 InitializeClass(ProcessingReason)
 
@@ -42,6 +51,9 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
 
     def _setId(self, *args, **kwargs):
         return
+
+    def getId(self):
+        return 'portal_privacy'
 
     def __init__(self, *args, **kwargs):
         super(PrivacyTool, self).__init__(self, *args, **kwargs)
