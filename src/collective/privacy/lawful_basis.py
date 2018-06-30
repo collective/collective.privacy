@@ -6,6 +6,7 @@ class LegalBasis(object):
         self.can_port = can_port
         self.default = default
 
+
 consent = LegalBasis(
     'consent',
     can_object=True,

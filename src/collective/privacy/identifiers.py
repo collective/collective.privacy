@@ -75,7 +75,7 @@ class UserIdentifier(object):
     @classmethod
     def getIdentifierForUser(kls, user):
         """Use UUID5 to get an integer ID in a namespace"""
-        return uuid.uuid5(self.NAMESPACE, user).int
+        return uuid.uuid5(kls.NAMESPACE, user).int
 
 
 class NoChoiceIdentifier(object):

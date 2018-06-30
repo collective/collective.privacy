@@ -3,6 +3,7 @@ from zope.viewlet.interfaces import IViewlet
 
 from plone.app.layout.analytics.view import AnalyticsViewlet
 
+
 @implementer(IViewlet)
 class PrivacyRespectingAnalyticsViewlet(AnalyticsViewlet):
 

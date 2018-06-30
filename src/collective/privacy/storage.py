@@ -1,8 +1,5 @@
 import time
 
-from zope.component import getUtility
-
-from .interfaces import IProcessingReason
 from .tool import ProcessingReason
 
 
@@ -33,7 +30,7 @@ class CookieStorage(BaseStorage):
         """Returns True if user has consented, False if they've objected and None if
         there is no data"""
         if identifier != self.getCurrentIdentifier():
-            raise ValueError("Cannot check processing data outside an active request for the user concerned")        
+            raise ValueError("Cannot check processing data outside an active request for the user concerned")
         cookies = self.request.cookies.get('dataprotection', '').split(';')
         if '{}|1'.format(self.processing_reason.__name__) in cookies:
             return True
@@ -63,7 +60,7 @@ class DatabaseStorage(BaseStorage):
         reason_id = processing_reason.__name__.encode('ascii', 'ignore')
         if reason_id not in privacy_tool.objectIds():
             privacy_tool._setObject(
-                reason_id, 
+                reason_id,
                 ProcessingReason(id=reason_id),
             )
         self.context = privacy_tool[reason_id]
@@ -97,7 +94,7 @@ class NoChoiceStorage(BaseStorage):
     """This represents a storage where the legal basis does not
     allow for the user to opt out, viz Contract, Legal Obligation and
     Vital interest.
-    
+
     It should not be used for other bases."""
 
     def __init__(self, processing_reason, site_root, request):

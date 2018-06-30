@@ -13,10 +13,6 @@ class IPrivacyTool(Interface):
     pass
 
 
-class IProcessingReason(Interface):
-    pass
-
-
 class IIdentifierFactory(Interface):
     __name__ = Attribute("An identifier for this identifier factory")
 

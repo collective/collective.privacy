@@ -63,18 +63,19 @@ class IDataUseCategory(Interface):
 
 def data_use_category(_context, name, title, description, legal_basis, storage, discriminator, marketing=False):
     _context.action(
-        discriminator = ('processing_reason', name, legal_basis, storage, discriminator),
-        callable = register_data_use_category,
-        args = (name, title, description, legal_basis, storage, discriminator),
+        discriminator=('processing_reason', name, legal_basis, storage, discriminator),
+        callable=register_data_use_category,
+        args=(name, title, description, legal_basis, storage, discriminator),
         )
     return
+
 
 def register_data_use_category(name, title, description, legal_basis, storage, discriminator, marketing=False):
     manager = getSiteManager()
     legal_basis_obj = manager.queryUtility(ILawfulBasis, name=legal_basis)
     if legal_basis_obj is None:
         raise ValueError('{} is not a valid lawful basis.'.format(legal_basis))
-    
+
     if marketing:
         kls = MarketingProcessingReason
     else:

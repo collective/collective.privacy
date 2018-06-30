@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 from zope.component.hooks import getSiteManager
+
 
 class ProcessingReason(object):
     def __init__(self,
@@ -16,7 +18,10 @@ class ProcessingReason(object):
         self.Description = description
 
     def __repr__(self):
-        return "<ProcessingReason {} using {}>".format(self.__name__, self.lawful_basis.__name__)
+        return "<ProcessingReason {} using {}>".format(
+            self.__name__,
+            self.lawful_basis.__name__
+        )
 
     def _setValue(self, request, user, value):
         if user is not None:
@@ -68,4 +73,3 @@ class MarketingProcessingReason(ProcessingReason):
     def objectToProcessing(self, request, user=None):
         """Mark the current user as having refused permission to process"""
         self._setValue(request, user, False)
-        
