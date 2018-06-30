@@ -21,7 +21,7 @@ class ProcessingReason(SimpleItem):
         self.objected = OIBTree()
 
     def __repr__(self):
-        return "<ProcessingReason at %s>" % '/'.join(self.absolute_path())
+        return "<ProcessingReason at {}>".format('/'.join(self.absolute_path()))
 
     def getId(self):
         return self.id

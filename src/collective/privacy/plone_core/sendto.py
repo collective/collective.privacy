@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Products.CMFPlone.browser.interfaces import ISendToForm
 from z3c.form import validator
 
