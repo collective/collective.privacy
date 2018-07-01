@@ -12,7 +12,7 @@
                  email. You may object to this processing of your email address
                  to prevent these emails being sent to you by other users."
     legal_basis="legitimate_interest"
-    discriminator="collective.privacy.identifiers.EmailIdentifier"
+    identifier="collective.privacy.identifiers.EmailIdentifier"
     storage="collective.privacy.storage.DatabaseStorage"
     />
 
@@ -22,7 +22,7 @@
     description="Analytics that are used to improve the website without
                  directly tracking users"
     legal_basis="legitimate_interest"
-    discriminator="collective.privacy.identifiers.CookieIdentifier"
+    identifier="collective.privacy.identifiers.CookieIdentifier"
     storage="collective.privacy.storage.CookieStorage"
     />
 
@@ -40,7 +40,7 @@
     description="Analytics that are used to improve the website that involve
                  tacking users"
     legal_basis="consent"
-    discriminator="collective.privacy.identifiers.CookieIdentifier"
+    identifier="collective.privacy.identifiers.CookieIdentifier"
     storage="collective.privacy.storage.CookieStorage"
     /-->
 

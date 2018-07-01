@@ -31,7 +31,7 @@
                  uses of your data. We need to store these to comply with data
                  protection law."
     legal_basis="legal_obligation"
-    discriminator="collective.privacy.identifiers.NoChoiceIdentifier"
+    identifier="collective.privacy.identifiers.NoChoiceIdentifier"
     storage="collective.privacy.storage.DatabaseStorage"
     />
 

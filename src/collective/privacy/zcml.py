@@ -30,7 +30,7 @@ class IDataUseCategory(Interface):
         required=True,
     )
 
-    discriminator = GlobalObject(
+    identifier = GlobalObject(
         title=_("How users will be identified"),
         description=_("An object that provides IIdentifierFactory"),
         required=True,
@@ -62,16 +62,16 @@ class IDataUseCategory(Interface):
     )
 
 
-def data_use_category(_context, name, title, description, legal_basis, storage, discriminator, marketing=False):
+def data_use_category(_context, name, title, description, legal_basis, storage, identifier, marketing=False):
     _context.action(
         discriminator=('processing_reason', name),
         callable=register_data_use_category,
-        args=(name, title, description, legal_basis, storage, discriminator),
+        args=(name, title, description, legal_basis, storage, identifier),
     )
     return
 
 
-def register_data_use_category(name, title, description, legal_basis, storage, discriminator, marketing=False):
+def register_data_use_category(name, title, description, legal_basis, storage, identifier, marketing=False):
     manager = getSiteManager()
     legal_basis_obj = manager.queryUtility(ILawfulBasis, name=legal_basis)
     if legal_basis_obj is None:
@@ -87,6 +87,6 @@ def register_data_use_category(name, title, description, legal_basis, storage, d
         description=description,
         lawful_basis=legal_basis_obj,
         optinoptout_storage=storage,
-        identifier_factory=discriminator,
+        identifier_factory=identifier,
     )
     manager.registerUtility(reason, IProcessingReason, name)
