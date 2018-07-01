@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from AccessControl.SecurityInfo import ClassSecurityInfo
 from App.class_init import InitializeClass
-from BTrees.OIBTree import OIBTree
+from BTrees.LFBTree import LFBTree
 from Products.CMFCore.utils import UniqueObject
 from Products.CMFPlone.PloneBaseTool import PloneBaseTool
 from OFS.SimpleItem import SimpleItem
@@ -18,8 +18,8 @@ class ProcessingReason(SimpleItem):
     def __init__(self, id, *args, **kwargs):
         super(ProcessingReason, self).__init__(*args, **kwargs)
         self.id = id
-        self.consented = OIBTree()
-        self.objected = OIBTree()
+        self.consented = LFBTree()  # I never thought I'd use one of these
+        self.objected = LFBTree()
 
     def __repr__(self):
         return "<ProcessingReason at {}>".format('/'.join(self.absolute_path()))

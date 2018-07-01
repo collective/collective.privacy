@@ -75,7 +75,7 @@ class DatabaseStorage(BaseStorage):
         self.processing_reason = processing_reason
 
     def consentToProcessing(self, identifier):
-        self.context.consented[identifier] = int(time.time())
+        self.context.consented[identifier] = time.time()
         try:
             del self.context.objected[identifier]
         except KeyError:
@@ -86,7 +86,7 @@ class DatabaseStorage(BaseStorage):
             del self.context.consented[identifier]
         except KeyError:
             pass
-        self.context.objected[identifier] = int(time.time())
+        self.context.objected[identifier] = time.time()
 
     def getProcessingStatus(self, identifier):
         if identifier in self.context.consented:
