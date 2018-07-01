@@ -38,7 +38,7 @@ class CookieStorage(BaseStorage):
             cookies = self.request.RESPONSE.cookies.get('dataprotection').get('value')
         else:
             cookies = self.request.cookies.get('dataprotection', '')
-        cookies = cookies.split(';')
+        cookies = cookies.split(':')
         if '{}|1'.format(self.processing_reason.__name__) in cookies:
             return True
         elif '{}|0'.format(self.processing_reason.__name__) in cookies:
@@ -48,16 +48,19 @@ class CookieStorage(BaseStorage):
 
     def _setProcessingCookie(self, shouldProcess):
         topic = self.processing_reason.__name__
-        existing_cookies = self.request.cookies.get('dataprotection', '')
-        existing_cookies = existing_cookies.split(';')
+        try:
+            existing_cookies = self.request.RESPONSE.cookies['dataprotection']['value']
+        except KeyError:
+            existing_cookies = self.request.cookies.get('dataprotection', '')
+        existing_cookies = existing_cookies.split(':')
         existing_cookies = filter(None, existing_cookies)
         existing_cookies = filter(
             lambda cookie: '{}|'.format(topic) not in cookie,
             existing_cookies
         )
         new_cookie = '{}|{:d}'.format(topic, int(shouldProcess))
-        cookie = ';'.join(existing_cookies + [new_cookie])
-        self.request.RESPONSE.setCookie('dataprotection', cookie)
+        cookie = ':'.join(existing_cookies + [new_cookie])
+        self.request.RESPONSE.setCookie('dataprotection', cookie, path='/')
 
 
 class DatabaseStorage(BaseStorage):

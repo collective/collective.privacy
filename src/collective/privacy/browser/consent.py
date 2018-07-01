@@ -7,6 +7,7 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.statusmessages.interfaces import IStatusMessage
+from plone.app.layout.viewlets import common as base
 
 
 class ConsentForm(form.SchemaForm):
@@ -98,3 +99,19 @@ class ConsentForm(form.SchemaForm):
     def handleCancel(self, action):
         """User cancelled. Redirect back to the front page.
         """
+
+
+class ConsentBannerViewlet(base.ViewletBase):
+
+    def getConsentRequired(self):
+        consent_reasons = [
+            reason
+            for reason in self.context.portal_privacy.getAllReasons().values()
+            if reason.lawful_basis.__name__ == 'consent'
+        ]
+        for reason in consent_reasons:
+            try:
+                if not reason.isOpinionExpressed(self.request):
+                    yield reason
+            except:
+                pass

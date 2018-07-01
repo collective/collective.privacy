@@ -25,4 +25,14 @@
     class=".consent.ConsentForm"
     />
 
+    <browser:viewlet
+        name="collective.privacy.banner"
+        manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+        template="templates/consent_banner.pt"
+        for="*"
+        layer="..interfaces.ICollectivePrivacyLayer"
+        permission="zope2.View"
+        class=".consent.ConsentBannerViewlet"
+    />
+
 </configure>

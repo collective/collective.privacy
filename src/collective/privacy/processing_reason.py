@@ -49,6 +49,19 @@ class ProcessingReason(object):
         else:
             raise ValueError("Cannot object to processing {!r}".format(self))
 
+    def isOpinionExpressed(self, request, identifier=None):
+        if identifier is None:
+            identifier = self.identifier_factory.getIdentifierForCurrentRequest(request)
+        else:
+            identifier = self.identifier_factory.getIdentifierForUser(identifier)
+        if identifier is None:
+            raise ValueError("Couldn't identify user")
+        else:
+            site = getSiteManager()
+            storage = self.optinoptout_storage(self, site, request)
+            value = storage.getProcessingStatus(identifier)
+            return value is not None
+
     def isProcessingAllowed(self, request, identifier=None):
         """Return True if processing is allowed or False if not"""
         if identifier is None:

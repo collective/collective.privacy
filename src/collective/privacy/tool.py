@@ -83,6 +83,14 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
             self.signIdentifier(processing_reason_id, user)
         )
 
+    def bannerConsent(self, processing_reason, consent=None, refuse=None):
+        """User-accessible consent action"""
+        if consent:
+            self.consentToProcessing(processing_reason)
+        elif refuse:
+            self.objectToProcessing(processing_reason)
+        return
+
     def getAllReasons(self):
         return dict(getUtilitiesFor(IProcessingReason))
 
