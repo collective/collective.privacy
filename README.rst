@@ -42,6 +42,14 @@ provides for embedding media might cause users to be tracked. The ZCML would be 
 This would add a new item to the privacy controls that relies on consent to proccess data. This means that by
 default the permission is denied until an end user gives permission.
 
+You can then guard your uses of the data, for example:
+
+    <div tal:condition="python: context.portal_privacy.processingIsAllowed('show_example_media_embed')">
+        ...
+    </div>
+
+
+
 Legal basis
 -----------
 
