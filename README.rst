@@ -17,6 +17,17 @@ Features
 - User-facing privacy management form
 - Integration with core Plone features
 
+Core Plone
+----------
+
+The following core Plone overrides are included:
+
+* The sendto_form now validates a to email address against people who have opted-out. The legal basis
+  chosen by default here is legitimate_interest.
+* The analytics viewlet also relies on legitimate interest, on the basis that it assumes the tracking
+  is unobtrusive and that this will be allowed by the upcoming changes to the ePrivacy regulations. If
+  the tracking is obtrusive or the site owner doesn't want to make this assumption it should be overridden
+  to use consent.
 
 Examples
 --------
@@ -183,6 +194,14 @@ Install collective.privacy by adding it to your buildout::
 and then running ``bin/buildout``
 
 
+Thanks
+------
+
+Thanks to Jazkarta ( http://jazkarta.com/ ) and YES! Magazine ( http://www.yesmagazine.org/ ) for
+each sponsoring some of the development costs of this add-on.
+
+The irony that these are both US companies is not lost on us.
+
 Contribute
 ----------
 
@@ -200,3 +219,16 @@ License
 -------
 
 The project is licensed under the GPLv2.
+
+N.B., the GPL states:
+
+    THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
+    PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED
+    OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+    MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE RISK AS
+    TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE
+    PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,
+    REPAIR OR CORRECTION.
+
+This add-on has not received any contributors from lawyers and should not be
+interpreted as legal advice.
