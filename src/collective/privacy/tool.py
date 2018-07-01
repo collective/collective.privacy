@@ -8,6 +8,7 @@ from OFS.SimpleItem import SimpleItem
 from OFS.ObjectManager import IFAwareObjectManager
 from OFS.OrderedFolder import OrderedFolder
 from zope.component import getUtility
+from zope.component import getUtilitiesFor
 
 from collective.privacy.interfaces import IProcessingReason
 
@@ -49,6 +50,9 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
 
     def __init__(self, *args, **kwargs):
         super(PrivacyTool, self).__init__(self, *args, **kwargs)
+
+    def getAllReasons(self):
+        return dict(getUtilitiesFor(IProcessingReason))
 
     def getProcessingReason(self, processing_reason_id):
         return getUtility(IProcessingReason, name=processing_reason_id)

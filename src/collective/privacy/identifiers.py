@@ -24,7 +24,10 @@ class EmailIdentifier(object):
     @classmethod
     def getIdentifierForCurrentRequest(kls, request):
         """ It is not possible to get the user's email address from a request"""
-        return None
+        try:
+            return kls.getIdentifierForUser(api.user.get_current().getProperty('email'))
+        except:
+            return None
 
     @classmethod
     def getIdentifierForUser(kls, user):

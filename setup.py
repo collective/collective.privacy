@@ -49,6 +49,7 @@ setup(
         'plone.app.relationfield',
         'plone.app.lockingbehavior',
         'plone.schema',
+        'plone.directives.form',
     ],
     extras_require={
         'test': [

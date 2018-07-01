@@ -64,7 +64,7 @@ class IDataUseCategory(Interface):
 
 def data_use_category(_context, name, title, description, legal_basis, storage, discriminator, marketing=False):
     _context.action(
-        discriminator=('processing_reason', name, legal_basis, storage, discriminator),
+        discriminator=('processing_reason', name),
         callable=register_data_use_category,
         args=(name, title, description, legal_basis, storage, discriminator),
     )

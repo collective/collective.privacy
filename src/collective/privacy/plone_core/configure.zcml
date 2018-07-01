@@ -1,6 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:gdpr="http://namespaces.plone.org/gdpr"
     i18n_domain="collective.privacy">
 
@@ -44,8 +45,9 @@
     /-->
 
 
-  <!--adapter
+  <adapter
+    zcml:condition="have plone-5"
     factory=".sendto.sendto_email"
-    /-->
+    />
 
 </configure>

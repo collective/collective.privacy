@@ -18,4 +18,11 @@
       directory="static"
       />
 
+  <browser:page
+    for="Products.CMFCore.interfaces.ISiteRoot"
+    name="consent"
+    permission="zope2.View"
+    class=".consent.ConsentForm"
+    />
+
 </configure>

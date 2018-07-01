@@ -33,7 +33,12 @@ class CookieStorage(BaseStorage):
         there is no data"""
         if identifier != self.getCurrentIdentifier():
             raise ValueError("Cannot check processing data outside an active request for the user concerned")
-        cookies = self.request.cookies.get('dataprotection', '').split(';')
+        if 'dataprotection' in self.request.RESPONSE.cookies:
+            # If this request changed the settings we use that in preference of the old ones
+            cookies = self.request.RESPONSE.cookies.get('dataprotection').get('value')
+        else:
+            cookies = self.request.cookies.get('dataprotection', '')
+        cookies = cookies.split(';')
         if '{}|1'.format(self.processing_reason.__name__) in cookies:
             return True
         elif '{}|0'.format(self.processing_reason.__name__) in cookies:
