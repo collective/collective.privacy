@@ -6,33 +6,157 @@
 collective.privacy
 ==================
 
-Tell me what your product does
+This Plone add-on adds concepts from the EU's General Data Protection Regulations
+to Plone configuration, which makes it easier to create Plone sites that respect
+the privacy rights of indivuals.
 
 Features
 --------
 
-- Can be bullet points
+- ZCML based declaration of uses of data
+- User-facing privacy management form
+- Integration with core Plone features
 
 
 Examples
 --------
 
-This add-on can be seen in action at the following sites:
-- Is there a page on the internet where everybody can see the features?
+Users can define a new data processing reason as configuration. For example, an add-on that
+provides for embedding media might cause users to be tracked. The ZCML would be modified to include::
 
 
-Documentation
--------------
+    <configure
+        xmlns="http://namespaces.zope.org/zope"
+        xmlns:gdpr="http://namespaces.plone.org/gdpr">
+        <gdpr:data_use_category
+            name="show_example_media_embed"
+            title="Embedded media from example.com"
+            description="We use example.com to embed media into the site. example.com monitors
+                         the usage patterns of users to provide enhanced analytics to site owners."
+            legal_basis="consent"
+            identifier="collective.privacy.identifiers.CookieIdentifier"
+            storage="collective.privacy.storage.CookieStorage"
+            />
+    </configure>
 
-Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
+This would add a new item to the privacy controls that relies on consent to proccess data. This means that by
+default the permission is denied until an end user gives permission.
+
+Legal basis
+-----------
+
+GDPR provides for six legal bases for processing, all of which are supported by collective.privacy.
+
+They are:
+
+consent
+*******
+
+See: https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/consent/
+
+Processing is disallowed by default, users can opt-in. There are rules as to what makes consent valid, which must be followed.
+
+contract
+********
+
+See: https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/contract/
+
+Processing is allowed and users cannot object.
 
 
-Translations
-------------
+legal_obligation
+****************
 
-This product has been translated into
+See: https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/legal-obligation/
 
-- Klingon (thanks, K'Plai)
+Processing is allowed and users cannot object.
+
+vital_interest
+****************
+
+See: https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/vital-interests/
+
+Processing is allowed and users cannot object.
+
+public_task
+***********
+
+See: https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/public-task/
+
+Processing is allowed by default, but users may object. This is only suitable for certain specific types of processing.
+
+legitimate_interest
+*******************
+
+See: https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/legitimate-interests/
+
+Processing is allowed by default, but users may object.
+
+
+Identifiers
+-----------
+
+It is necessary to tell one user from another when managing their preferences. In some cases different
+identifiers are more useful than others. For example, when sending email we want to key users on the
+email address, but using cookies should be managed by the browser, regardless of the user's logged in state.
+
+The way of choosing which is used is called a identifier. The following are available:
+
+collective.privacy.identifiers.CookieIdentifier
+***********************************************
+
+This identifier should be used in cases where the storage is cookie based. It allows the current user
+to be identifier, but not other arbitrary users.
+
+collective.privacy.identifiers.EmailIdentifier
+**********************************************
+
+This identifier should be used when the user needs to be identified by email address. It can optionally
+use the email address of a logged in user to identify the current request, but in general it cannot
+identify the current user.
+
+The identifier is a UUID derived from the email address using a one-way function, not the email itself.
+
+collective.privacy.identifiers.IPIdentifier
+*******************************************
+
+This identifier should be used to identify a connection. It can be used to identify the current user or
+other arbitrary users. It is less reliable than the CookieIdentifier as users IP addresses can change.
+
+The identifier is a UUID derived from the IP address using a one-way function, not the IP itself.
+
+collective.privacy.identifiers.UserIdentifier
+*********************************************
+
+This identifier can only be used to identify logged-in users. It can identify any users who are registered
+on the site, but not anonymous visitors. As such, it's appropriate for data processing that only occurs
+for registered users.
+
+The identifier is a UUID derived from the user name using a one-way function, not the username itself.
+
+Storages
+--------
+
+The storage determines how the user's preferences are persisted. There are three storages available::
+
+collective.privacy.storage.CookieStorage
+****************************************
+
+This storage uses a cookie called 'dataprotection' on the user's browser. Consent is not required
+to set this cookie as it is set to comply with legal obligations and cannot be used to track the user.
+
+collective.privacy.storage.DatabaseStorage
+******************************************
+
+This storage uses BTrees inside the portal_privacy tool to store the time the user consented or objected.
+It is currently the only storage that allows for the preferences of users to be queried outside of a request
+they have initiated.
+
+collective.privacy.storage.NoChoiceStorage
+******************************************
+
+This is a stub storage to be used with legal bases such as vital_interest where the user has no option
+to object to processing.
 
 
 Installation
@@ -63,8 +187,6 @@ Support
 -------
 
 If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
-
 
 License
 -------
