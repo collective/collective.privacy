@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import time
+from email.Utils import formatdate
 
 from .tool import ProcessingReason
 
@@ -60,7 +61,9 @@ class CookieStorage(BaseStorage):
         )
         new_cookie = '{}|{:d}'.format(topic, int(shouldProcess))
         cookie = ':'.join(existing_cookies + [new_cookie])
-        self.request.RESPONSE.setCookie('dataprotection', cookie, path='/')
+        expiration_seconds = time.time() + (60*60*24*365)
+        expires = formatdate(expiration_seconds, usegmt=True) 
+        self.request.RESPONSE.setCookie('dataprotection', cookie, path='/', expires=expires)
 
 
 class DatabaseStorage(BaseStorage):

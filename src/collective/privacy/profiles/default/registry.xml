@@ -7,4 +7,11 @@
     </field>
     <value>False</value>
   </record>
+  <record name="collective.privacy.solicit_consent">
+    <field type="plone.registry.field.Bool">
+      <title>Display consent banner</title>
+      <description>Display a banner soliciting consent for all items that require consent that the user hasn't already answered</description>
+    </field>
+    <value>False</value>
+  </record>
 </registry>

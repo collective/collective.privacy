@@ -1,3 +1,4 @@
+from plone import api
 from plone.directives import form
 from zope import schema
 from zope.interface import Interface
@@ -104,6 +105,9 @@ class ConsentForm(form.SchemaForm):
 class ConsentBannerViewlet(base.ViewletBase):
 
     def getConsentRequired(self):
+        found = []
+        if not api.portal.get_registry_record('collective.privacy.solicit_consent'):
+            return found
         consent_reasons = [
             reason
             for reason in self.context.portal_privacy.getAllReasons().values()
@@ -112,6 +116,7 @@ class ConsentBannerViewlet(base.ViewletBase):
         for reason in consent_reasons:
             try:
                 if not reason.isOpinionExpressed(self.request):
-                    yield reason
+                    found.append(reason)
             except:
                 pass
+        return found
