@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+import hmac
+import uuid
+
 from AccessControl.SecurityInfo import ClassSecurityInfo
 from App.class_init import InitializeClass
-from BTrees.LFBTree import LFBTree
+from BTrees.OOBTree import OOBTree
 from Products.CMFCore.utils import UniqueObject
 from Products.CMFPlone.PloneBaseTool import PloneBaseTool
 from OFS.SimpleItem import SimpleItem
@@ -18,8 +21,8 @@ class ProcessingReason(SimpleItem):
     def __init__(self, id, *args, **kwargs):
         super(ProcessingReason, self).__init__(*args, **kwargs)
         self.id = id
-        self.consented = LFBTree()  # I never thought I'd use one of these
-        self.objected = LFBTree()
+        self.consented = OOBTree()  # LFBtree only supports some longs, not all and there is no OFBTree
+        self.objected = OOBTree()
 
     def __repr__(self):
         return "<ProcessingReason at {}>".format('/'.join(self.absolute_path()))
@@ -50,6 +53,35 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
 
     def __init__(self, *args, **kwargs):
         super(PrivacyTool, self).__init__(self, *args, **kwargs)
+        self._signing_secret = uuid.uuid4().hex
+
+    def signIdentifier(self, processing_reason_id, user=None):
+        processing_reason = self.getProcessingReason(processing_reason_id)
+        if user is None:
+            identifier = processing_reason.identifier_factory.getIdentifierForCurrentRequest(self.REQUEST)
+        else:
+            identifier = processing_reason.identifier_factory.getIdentifierForUser(user)
+        if identifier is None:
+            raise ValueError("Couldn't identify user")
+        return hmac.new(
+            self._signing_secret,
+            msg=str(identifier)
+        ).hexdigest()
+
+    def verifyIdentifier(self, signed, processing_reason_id, user=None):
+        return hmac.compare_digest(
+            signed,
+            self.signIdentifier(processing_reason_id, user)
+        )
+
+    def getConsentLink(self, processing_reason_id, user=None):
+        site = self.portal_url.getPortalObject()
+        return "{}/@@consent?processing_reason={}&user_id={}&authentication={}".format(
+            site.absolute_url(),
+            processing_reason_id,
+            user,
+            self.signIdentifier(processing_reason_id, user)
+        )
 
     def getAllReasons(self):
         return dict(getUtilitiesFor(IProcessingReason))

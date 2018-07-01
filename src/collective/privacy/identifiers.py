@@ -25,7 +25,13 @@ class EmailIdentifier(object):
     def getIdentifierForCurrentRequest(kls, request):
         """ It is not possible to get the user's email address from a request"""
         try:
-            return kls.getIdentifierForUser(api.user.get_current().getProperty('email'))
+            if api.portal.get_registry_record('collective.privacy.trust_member_emails'):
+                email = api.user.get_current().getProperty('email')
+            else:
+                email = None
+            if not email:
+                return None
+            return kls.getIdentifierForUser(email)
         except:
             return None
 
@@ -74,7 +80,10 @@ class UserIdentifier(object):
     @classmethod
     def getIdentifierForCurrentRequest(kls, request):
         """ It is not possible to get the user's email address from a request"""
-        return kls.getIdentifierForUser(api.user.get_current().getUserName())
+        username = api.user.get_current().getUserName()
+        if not username:
+            return None
+        return kls.getIdentifierForUser(username)
 
     @classmethod
     def getIdentifierForUser(kls, user):

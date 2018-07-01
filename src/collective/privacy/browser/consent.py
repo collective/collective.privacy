@@ -22,11 +22,44 @@ class ConsentForm(form.SchemaForm):
     description = u"Choose to opt in or out of various pieces of functionality"
 
     @property
+    def action(self):
+        return self._action
+
+    @property
     def schema(self):
         reasons = self.context.portal_privacy.getAllReasons()
+        validated_user = None
+        self._action = self.url(name="consent")
+        if 'user_id' in self.request.form:
+            processing_reason = self.request.form.get('processing_reason')
+            user_id = self.request.form.get('user_id')
+            authentication = self.request.form.get('authentication')
+            if self.context.portal_privacy.verifyIdentifier(
+                authentication,
+                processing_reason,
+                user_id
+            ):
+                reason_object = self.context.portal_privacy.getProcessingReason(processing_reason)
+                validated_user = (
+                    reason_object.identifier_factory.__name__,
+                    user_id
+                )
+                self._action = self.url(
+                    name="consent",
+                    data={
+                        'processing_reason': processing_reason,
+                        'user_id': user_id,
+                        'authentication': authentication,
+                    }
+                )
+
         class IConsentForm(Interface):
-            for reason_id, reason in reasons.items():
-                if reason.identifier_factory.getIdentifierForCurrentRequest(self.request) is None:
+            for reason_id, reason in sorted(reasons.items()):
+                reason_match = validated_user and validated_user[0] == reason.identifier_factory.__name__
+                if reason_match:
+                    if reason.identifier_factory.getIdentifierForUser(validated_user[1]) is None:
+                        continue
+                elif reason.identifier_factory.getIdentifierForCurrentRequest(self.request) is None:
                     continue
                 reason_id = reason_id.encode('ascii', 'replace')
                 form.widget(reason_id, RadioFieldWidget)
@@ -37,9 +70,10 @@ class ConsentForm(form.SchemaForm):
                     description=reason.Description,
                     values=('Allowed', 'Blocked'),
                     required=True,
-                    default='Allowed' if reason.isProcessingAllowed(self.request) else 'Blocked',
+                    default='Allowed' if reason.isProcessingAllowed(self.request, identifier=validated_user[1] if reason_match else None) else 'Blocked',
                 )
             del reason_id
+            del reason_match
             del reason
         return IConsentForm
 

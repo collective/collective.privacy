@@ -32,7 +32,7 @@
                  protection law."
     legal_basis="legal_obligation"
     identifier="collective.privacy.identifiers.NoChoiceIdentifier"
-    storage="collective.privacy.storage.DatabaseStorage"
+    storage="collective.privacy.storage.NoChoiceStorage"
     />
 
 

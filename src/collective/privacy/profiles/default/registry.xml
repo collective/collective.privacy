@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <registry>
-<!-- -*- extra stuff goes here -*- -->
-
+  <record name="collective.privacy.trust_member_emails">
+    <field type="plone.registry.field.Bool">
+      <title>Trust member emails</title>
+      <description>Allow logged in users to edit the privacy settings associated with the email address in their profile</description>
+    </field>
+    <value>False</value>
+  </record>
 </registry>
