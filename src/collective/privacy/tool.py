@@ -55,6 +55,7 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
         super(PrivacyTool, self).__init__(self, *args, **kwargs)
         self._signing_secret = uuid.uuid4().hex
 
+    security.declarePrivate("signIdentifier")
     def signIdentifier(self, processing_reason_id, user=None):
         processing_reason = self.getProcessingReason(processing_reason_id)
         if user is None:
@@ -68,12 +69,14 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
             msg=str(identifier)
         ).hexdigest()
 
+    security.declarePrivate("verifyIdentifier")
     def verifyIdentifier(self, signed, processing_reason_id, user=None):
         return hmac.compare_digest(
             signed,
             self.signIdentifier(processing_reason_id, user)
         )
 
+    security.declarePrivate("getConsentLink")
     def getConsentLink(self, processing_reason_id, user=None):
         site = self.portal_url.getPortalObject()
         return "{}/@@consent?processing_reason={}&user_id={}&authentication={}".format(
@@ -83,6 +86,7 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
             self.signIdentifier(processing_reason_id, user)
         )
 
+    security.declarePublic("bannerConsent")
     def bannerConsent(self, processing_reason, consent=None, refuse=None):
         """User-accessible consent action"""
         if consent:
@@ -91,20 +95,25 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
             self.objectToProcessing(processing_reason)
         return
 
+    security.declarePublic("getAllReasons")
     def getAllReasons(self):
         return dict(getUtilitiesFor(IProcessingReason))
 
+    security.declarePublic("getProcessingReason")
     def getProcessingReason(self, processing_reason_id):
         return getUtility(IProcessingReason, name=processing_reason_id)
 
+    security.declarePublic("processingIsAllowed")
     def processingIsAllowed(self, processing_reason_id, user=None):
         processing_reason = self.getProcessingReason(processing_reason_id)
         return processing_reason.isProcessingAllowed(self.REQUEST, user)
 
+    security.declarePrivate("objectToProcessing")
     def objectToProcessing(self, processing_reason_id, user=None):
         processing_reason = self.getProcessingReason(processing_reason_id)
         processing_reason.objectToProcessing(request=self.REQUEST, user=user)
 
+    security.declarePrivate("consentToProcessing")
     def consentToProcessing(self, processing_reason_id, user=None):
         processing_reason = self.getProcessingReason(processing_reason_id)
         processing_reason.consentToProcessing(request=self.REQUEST, user=user)
