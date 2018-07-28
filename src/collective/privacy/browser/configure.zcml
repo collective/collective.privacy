@@ -7,16 +7,16 @@
   <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
   <include package="z3c.jbot" file="meta.zcml" />
   <browser:jbot
-      directory="overrides"
-      layer="collective.privacy.interfaces.ICollectivePrivacyLayer"
-      />
+    directory="overrides"
+    layer="collective.privacy.interfaces.ICollectivePrivacyLayer"
+    />
 
   <!-- Publish static files -->
   <plone:static
-      name="collective.privacy"
-      type="plone"
-      directory="static"
-      />
+    name="collective.privacy"
+    type="plone"
+    directory="static"
+    />
 
   <browser:page
     for="Products.CMFCore.interfaces.ISiteRoot"
@@ -25,14 +25,14 @@
     class=".consent.ConsentForm"
     />
 
-    <browser:viewlet
-        name="collective.privacy.banner"
-        manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
-        template="templates/consent_banner.pt"
-        for="*"
-        layer="..interfaces.ICollectivePrivacyLayer"
-        permission="zope2.View"
-        class=".consent.ConsentBannerViewlet"
+  <browser:viewlet
+    name="collective.privacy.banner"
+    manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+    template="templates/consent_banner.pt"
+    for="*"
+    layer="..interfaces.ICollectivePrivacyLayer"
+    permission="zope2.View"
+    class=".consent.ConsentBannerViewlet"
     />
 
 </configure>

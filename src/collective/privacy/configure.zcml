@@ -10,12 +10,6 @@
 
   <i18n:registerTranslations directory="locales" />
 
-  <!--
-    Be careful if you use general includeDependencies, it can have sideffects!
-    Better import explicite packages or configurations ;)
-  -->
-  <!--<includeDependencies package="." />-->
-
   <include package=".browser" />
 
   <include file="permissions.zcml" />
@@ -37,35 +31,35 @@
 
 
   <genericsetup:registerProfile
-      name="default"
-      title="collective.privacy"
-      directory="profiles/default"
-      description="Installs the collective.privacy add-on."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.post_install"
-      />
+    name="default"
+    title="collective.privacy"
+    directory="profiles/default"
+    description="Installs the collective.privacy add-on."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    post_handler=".setuphandlers.post_install"
+    />
 
   <genericsetup:registerProfile
-      name="uninstall"
-      title="collective.privacy (uninstall)"
-      directory="profiles/uninstall"
-      description="Uninstalls the collective.privacy add-on."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.uninstall"
-      />
+    name="uninstall"
+    title="collective.privacy (uninstall)"
+    directory="profiles/uninstall"
+    description="Uninstalls the collective.privacy add-on."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    post_handler=".setuphandlers.uninstall"
+    />
 
   <utility
-      factory=".setuphandlers.HiddenProfiles"
-      name="collective.privacy-hiddenprofiles"
-      />
+    factory=".setuphandlers.HiddenProfiles"
+    name="collective.privacy-hiddenprofiles"
+    />
 
   <five:registerClass
-      class=".tool.ProcessingReason"
-      meta_type="Processing Reason"
-      addview="addProcessingReason.html"
-      permission="cmf.ManagePortal"
-      global="False"
-      />
+    class=".tool.ProcessingReason"
+    meta_type="Processing Reason"
+    addview="addProcessingReason.html"
+    permission="cmf.ManagePortal"
+    global="False"
+    />
 
   <cmf:registerDirectory name="skins" directory="skins" recursive="True" />
 
