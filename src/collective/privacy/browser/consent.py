@@ -65,7 +65,7 @@ class ConsentForm(form.SchemaForm):
                     continue
                 reason_id = reason_id.encode('ascii', 'replace')
                 form.widget(reason_id, RadioFieldWidget)
-                if not reason.lawful_basis.can_object:
+                if not reason.can_object:
                     form.mode(**{reason_id:'display'})
                 locals()[reason_id] = schema.Choice(
                     title=reason.Title,

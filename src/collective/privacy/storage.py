@@ -114,7 +114,7 @@ class NoChoiceStorage(BaseStorage):
         self.context = site_root
         self.request = request
         self.processing_reason = processing_reason
-        if processing_reason.lawful_basis.can_object:
+        if processing_reason.can_object:
             raise ValueError("NoChoiceStorage is not suitable for lawful bases where objection is allowed")
 
     def consentToProcessing(self, identifier):

@@ -23,6 +23,10 @@ class ProcessingReason(object):
             self.lawful_basis.__name__
         )
 
+    @property
+    def can_object(self):
+        return self.lawful_basis.can_object
+
     def _setValue(self, request, user, value):
         if user is not None:
             identifier = self.identifier_factory.getIdentifierForUser(user)
@@ -44,7 +48,7 @@ class ProcessingReason(object):
 
     def objectToProcessing(self, request, user=None):
         """Mark the current user as having refused permission to process"""
-        if self.lawful_basis.can_object:
+        if self.can_object:
             self._setValue(request, user, False)
         else:
             raise ValueError("Cannot object to processing {!r}".format(self))
@@ -83,6 +87,7 @@ class MarketingProcessingReason(ProcessingReason):
     """Users can always object to processing for marketing reasons,
     regardless of the legal basis"""
 
-    def objectToProcessing(self, request, user=None):
-        """Mark the current user as having refused permission to process"""
-        self._setValue(request, user, False)
+    @property
+    def can_object(self):
+        return True
+
