@@ -13,14 +13,12 @@ _ = MessageFactory('collective.privacy')
 
 class IDataUseCategory(Interface):
     """
-    Register an adapter
+    Register a data use category
     """
 
     name = TextLine(
         title=_("Name"),
-        description=_("Adapters can have names.\n\n"
-                      "This attribute allows you to specify the name for"
-                      " this adapter."),
+        description=_("The id used for this category."),
         required=False,
     )
 
@@ -44,7 +42,7 @@ class IDataUseCategory(Interface):
 
     title = TextLine(
         title=_("Title"),
-        description=_("The end-user visible name for this processing"),
+        description=_("The end-user visible title for this processing"),
         required=False,
     )
 
@@ -61,24 +59,35 @@ class IDataUseCategory(Interface):
         default=False,
     )
 
+    tracking = Bool(
+        title=_("Tracking"),
+        description=_("Is this used for tracking purposes?"),
+        required=False,
+        default=False,
+    )
 
-def data_use_category(_context, name, title, description, legal_basis, storage, identifier, marketing=False):
+
+def data_use_category(_context, name, title, description, legal_basis, storage, identifier, marketing=False, tracking=False):
     _context.action(
         discriminator=('processing_reason', name),
         callable=register_data_use_category,
-        args=(name, title, description, legal_basis, storage, identifier),
+        args=(name, title, description, legal_basis, storage, identifier, marketing, tracking),
     )
     return
 
 
-def register_data_use_category(name, title, description, legal_basis, storage, identifier, marketing=False):
+def register_data_use_category(name, title, description, legal_basis, storage, identifier, marketing=False, tracking=False):
     manager = getSiteManager()
     legal_basis_obj = manager.queryUtility(ILawfulBasis, name=legal_basis)
     if legal_basis_obj is None:
         raise ValueError('{} is not a valid lawful basis.'.format(legal_basis))
 
-    if marketing:
+    if marketing and tracking:
+        kls = MarketingTrackingProcessingReason
+    elif marketing:
         kls = MarketingProcessingReason
+    elif tracking:
+        kls = TrackingProcessingReason
     else:
         kls = ProcessingReason
     reason = kls(

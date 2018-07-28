@@ -91,3 +91,23 @@ class MarketingProcessingReason(ProcessingReason):
     def can_object(self):
         return True
 
+
+class TrackingProcessingReason(ProcessingReason):
+    """Users can instruct their browsers to refuse consent on their
+    behalf using the Do-Not-Track header."""
+
+    def isOpinionExpressed(self, request, identifier=None):
+        if identifier is None:
+            if request.headers.get('X-Do-Not-Track'):
+                return True
+        return super(TrackingProcessingReason, self).isOpinionExpressed(request, identifier)
+
+    def isProcessingAllowed(self, request, identifier=None):
+        if identifier is None:
+            if request.headers.get('X-Do-Not-Track'):
+                return False
+        return super(TrackingProcessingReason, self).isOpinionExpressed(request, identifier)
+
+
+class MarketingTrackingProcessingReason(MarketingProcessingReason, TrackingProcessingReason):
+    pass
