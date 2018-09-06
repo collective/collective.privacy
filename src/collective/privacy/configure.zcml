@@ -61,6 +61,5 @@
     global="False"
     />
 
-  <cmf:registerDirectory name="skins" directory="skins" recursive="True" />
 
 </configure>
