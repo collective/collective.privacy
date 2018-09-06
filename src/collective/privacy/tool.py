@@ -10,6 +10,7 @@ from Products.CMFPlone.PloneBaseTool import PloneBaseTool
 from OFS.SimpleItem import SimpleItem
 from OFS.ObjectManager import IFAwareObjectManager
 from OFS.OrderedFolder import OrderedFolder
+from zope.component import getGlobalSiteManager
 from zope.component import getUtility
 from zope.component import getUtilitiesFor
 
@@ -101,7 +102,9 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
 
     security.declarePublic("getProcessingReason")
     def getProcessingReason(self, processing_reason_id):
-        return getUtility(IProcessingReason, name=processing_reason_id)
+        # We might be called from Diazo, so we should explicitly get the GSM
+        gsm = getGlobalSiteManager()
+        return gsm.getUtility(IProcessingReason, name=processing_reason_id)
 
     security.declarePublic("processingIsAllowed")
     def processingIsAllowed(self, processing_reason_id, user=None):
