@@ -21,7 +21,7 @@
     title="Unintrusive analytics"
     description="Analytics that are used to improve the website without
                  directly tracking users"
-    legal_basis="consent"
+    legal_basis="legitimate_interest"
     identifier="collective.privacy.identifiers.CookieIdentifier"
     storage="collective.privacy.storage.CookieStorage"
     />
