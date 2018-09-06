@@ -1,0 +1,45 @@
+<div id="gdpr-consent-banner" tal:define="needed python:tuple(view.getConsentRequired())" tal:condition="needed" style="
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 5px;
+    background: orange;">
+    <form method="POST" tal:repeat="reason needed"
+          style="max-width: 800px; margin: auto;"
+          tal:attributes="action string:${context/portal_privacy/absolute_url}/bannerConsent">
+        <div class="hider" tal:define="extra_styles python:'' if repeat['reason'].index == 0 else 'display: none'" tal:attributes="style extra_styles">
+        <div style="float: left; max-width: 60%;">
+            <strong tal:content="reason/Title"></strong>
+            <p tal:content="reason/Description"></p>
+        </div>
+        <input type="hidden" name="processing_reason" tal:attributes="value python:reason.__name__" />
+        <div style="float: right; padding-top: 5px;" class="gdpr-actions">
+            <input style="padding: 5px; margin-right: 10px;" type="submit" name="consent" value="Allow" />
+            <input style="padding: 5px; margin-right: 10px;" type="submit" name="refuse" value="Refuse" />
+        </div>
+        </div>
+    </form>
+    <script>
+        $(function() {
+            $('.gdpr-actions input').on('click', function(evt) {
+                var form = $(this).closest('form');
+                var data = form.serialize();
+                data += '&'+this.name+'=1';
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/site/portal_privacy/bannerConsent",
+                    data: data
+                    }
+                ).done(function() {
+                    form.remove();
+                    $('#gdpr-consent-banner').find('form:first').find('.hider').css('display', '');
+                    if ($('#gdpr-consent-banner').find('form').length == 0) {
+                        $('#gdpr-consent-banner').remove();
+                    }
+                });
+                evt.preventDefault();
+            });
+        });
+    </script>
+</div>
