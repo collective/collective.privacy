@@ -9,9 +9,16 @@ python:
   - "2.7"
 matrix:
   fast_finish: true
+env:
+  matrix:
+    - PLONE_VERSION=4.3.x
+    - PLONE_VERSION=5.0.x
+    - PLONE_VERSION=5.1.x
 install:
   - virtualenv -p `which python` .
   - bin/pip install -r requirements.txt
+  - sed -ie "s#plone-x.x.x.cfg#plone-$PLONE_VERSION.cfg#" travis.cfg
+  - bin/buildout -t 10 -c travis.cfg
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
 before_script:
