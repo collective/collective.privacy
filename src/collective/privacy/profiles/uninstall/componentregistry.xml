@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<componentregistry>
+  <utilities>
+    <utility
+      remove="True"
+      interface="collective.privacy.interfaces.IPrivacyTool"
+      object="portal_privacy"/>
+  </utilities>
+</componentregistry>

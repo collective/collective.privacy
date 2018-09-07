@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<tool-setup>
+ <forbidden tool_id="portal_privacy"
+
+           class="collective.privacy.tool.PrivacyTool"/>
+</tool-setup>

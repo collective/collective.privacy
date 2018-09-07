@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<registry>
+  <record name="collective.privacy.trust_member_emails" remove="True">
+  </record>
+  <record name="collective.privacy.solicit_consent" remove="True">
+  </record>
+</registry>
