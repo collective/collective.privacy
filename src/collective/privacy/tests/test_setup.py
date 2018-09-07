@@ -4,6 +4,8 @@ from collective.privacy.testing import COLLECTIVE_PRIVACY_INTEGRATION_TESTING  #
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
 
 import unittest
 
@@ -58,3 +60,14 @@ class TestUninstall(unittest.TestCase):
         self.assertNotIn(
             ICollectivePrivacyLayer,
             utils.registered_layers())
+
+    def test_configuration_registry_removed(self):
+        """ Test that registry keys added to the configuration registry
+            are removed."""
+        registry = getUtility(IRegistry)
+        self.assertNotIn('collective.privacy.trust_member_emails', registry)
+        self.assertNotIn('collective.privacy.solicit_consent', registry)
+
+    def test_privacy_tool_not_in_site_root(self):
+        """ Test that the privacy tool is uninstalled """
+        self.assertNotIn('privacy_tool', self.portal)
