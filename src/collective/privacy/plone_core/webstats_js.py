@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-
+from plone.app.layout.analytics.view import AnalyticsViewlet
 from zope.interface import implementer
 from zope.viewlet.interfaces import IViewlet
-
-from plone.app.layout.analytics.view import AnalyticsViewlet
 
 
 @implementer(IViewlet)

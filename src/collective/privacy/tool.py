@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
-import hmac
-import uuid
-
 from AccessControl.SecurityInfo import ClassSecurityInfo
 from App.class_init import InitializeClass
 from BTrees.OOBTree import OOBTree
-from Products.CMFCore.utils import UniqueObject
-from Products.CMFPlone.PloneBaseTool import PloneBaseTool
-from OFS.SimpleItem import SimpleItem
+from collective.privacy.interfaces import IProcessingReason
 from OFS.ObjectManager import IFAwareObjectManager
 from OFS.OrderedFolder import OrderedFolder
-from zope.component import getUtility
+from OFS.SimpleItem import SimpleItem
+from Products.CMFCore.utils import UniqueObject
+from Products.CMFPlone.PloneBaseTool import PloneBaseTool
 from zope.component import getUtilitiesFor
 
-from collective.privacy.interfaces import IProcessingReason
+import hmac
+import uuid
 
 
 class ProcessingReason(SimpleItem):
@@ -55,7 +53,7 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
         super(PrivacyTool, self).__init__(self, *args, **kwargs)
         self._signing_secret = uuid.uuid4().hex
 
-    security.declarePrivate("signIdentifier")
+    @security.private
     def signIdentifier(self, processing_reason_id, user=None):
         processing_reason = self.getProcessingReason(processing_reason_id)
         if user is None:
@@ -69,14 +67,14 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
             msg=str(identifier)
         ).hexdigest()
 
-    security.declarePrivate("verifyIdentifier")
+    @security.private
     def verifyIdentifier(self, signed, processing_reason_id, user=None):
         return hmac.compare_digest(
             signed,
             self.signIdentifier(processing_reason_id, user)
         )
 
-    security.declarePrivate("getConsentLink")
+    @security.private
     def getConsentLink(self, processing_reason_id, user=None):
         site = self.portal_url.getPortalObject()
         return "{}/@@consent?processing_reason={}&user_id={}&authentication={}".format(
@@ -86,7 +84,7 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
             self.signIdentifier(processing_reason_id, user)
         )
 
-    security.declarePublic("bannerConsent")
+    @security.public
     def bannerConsent(self, processing_reason, consent=None, refuse=None):
         """User-accessible consent action"""
         if consent:
@@ -95,27 +93,27 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
             self.objectToProcessing(processing_reason)
         return
 
-    security.declarePublic("getAllReasons")
+    @security.public
     def getAllReasons(self):
         return dict(getUtilitiesFor(IProcessingReason))
 
-    security.declarePublic("getProcessingReason")
+    @security.public
     def getProcessingReason(self, processing_reason_id):
         # We might be called from Diazo, so we should explicitly get the site manager
         lsm = self.aq_inner.aq_parent.getSiteManager()
         return lsm.getUtility(IProcessingReason, name=processing_reason_id)
 
-    security.declarePublic("processingIsAllowed")
+    @security.public
     def processingIsAllowed(self, processing_reason_id, user=None):
         processing_reason = self.getProcessingReason(processing_reason_id)
         return processing_reason.isProcessingAllowed(self.REQUEST, user)
 
-    security.declarePrivate("objectToProcessing")
+    @security.private
     def objectToProcessing(self, processing_reason_id, user=None):
         processing_reason = self.getProcessingReason(processing_reason_id)
         processing_reason.objectToProcessing(request=self.REQUEST, user=user)
 
-    security.declarePrivate("consentToProcessing")
+    @security.private
     def consentToProcessing(self, processing_reason_id, user=None):
         processing_reason = self.getProcessingReason(processing_reason_id)
         processing_reason.consentToProcessing(request=self.REQUEST, user=user)

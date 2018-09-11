@@ -1,14 +1,11 @@
+# -*- coding: utf-8 -*-
 from plone import api
+from plone.app.layout.viewlets import common as base
 from plone.directives import form
+from z3c.form import button
+from z3c.form.browser.radio import RadioFieldWidget
 from zope import schema
 from zope.interface import Interface
-from z3c.form import button, field
-from z3c.form.browser.radio import RadioFieldWidget
-from zope.schema.vocabulary import SimpleVocabulary
-
-from Products.CMFCore.interfaces import ISiteRoot
-from Products.statusmessages.interfaces import IStatusMessage
-from plone.app.layout.viewlets import common as base
 
 
 class ConsentForm(form.SchemaForm):
@@ -66,7 +63,7 @@ class ConsentForm(form.SchemaForm):
                 reason_id = reason_id.encode('ascii', 'replace')
                 form.widget(reason_id, RadioFieldWidget)
                 if not reason.can_object:
-                    form.mode(**{reason_id:'display'})
+                    form.mode(**{reason_id: 'display'})
                 locals()[reason_id] = schema.Choice(
                     title=reason.Title,
                     description=reason.Description,
@@ -117,6 +114,7 @@ class ConsentBannerViewlet(base.ViewletBase):
             try:
                 if not reason.isOpinionExpressed(self.request):
                     found.append(reason)
-            except:
+            except Exception:
+                # FIXME
                 pass
         return found

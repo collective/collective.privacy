@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
+from collective.privacy.interfaces import ILawfulBasis
+from collective.privacy.interfaces import IProcessingReason
+from collective.privacy.processing_reason import MarketingProcessingReason
+from collective.privacy.processing_reason import MarketingTrackingProcessingReason
+from collective.privacy.processing_reason import ProcessingReason
+from collective.privacy.processing_reason import TrackingProcessingReason
 from zope.component._api import getSiteManager
 from zope.configuration.fields import GlobalObject
 from zope.i18nmessageid import MessageFactory
 from zope.interface import Interface
-from zope.schema import Bool, TextLine
-
-from collective.privacy.interfaces import ILawfulBasis, IProcessingReason
-from collective.privacy.processing_reason import MarketingProcessingReason, ProcessingReason
+from zope.schema import Bool
+from zope.schema import TextLine
 
 _ = MessageFactory('collective.privacy')
 
