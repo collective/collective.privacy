@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-
-import time
+from collective.privacy.tool import ProcessingReason
 from email.Utils import formatdate
 
-from .tool import ProcessingReason
+import time
 
 
 class BaseStorage(object):
@@ -61,8 +60,8 @@ class CookieStorage(BaseStorage):
         )
         new_cookie = '{}|{:d}'.format(topic, int(shouldProcess))
         cookie = ':'.join(existing_cookies + [new_cookie])
-        expiration_seconds = time.time() + (60*60*24*365)
-        expires = formatdate(expiration_seconds, usegmt=True) 
+        expiration_seconds = time.time() + (60 * 60 * 24 * 365)
+        expires = formatdate(expiration_seconds, usegmt=True)
         self.request.RESPONSE.setCookie('dataprotection', cookie, path='/', expires=expires)
 
 

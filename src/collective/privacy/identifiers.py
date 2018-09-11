@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-import uuid
-
 from plone import api
+
+import uuid
 
 
 class CookieIdentifier(object):
@@ -32,7 +32,8 @@ class EmailIdentifier(object):
             if not email:
                 return None
             return kls.getIdentifierForUser(email)
-        except:
+        except Exception:
+            # FIXME
             return None
 
     @classmethod
