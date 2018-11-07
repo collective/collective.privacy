@@ -66,7 +66,7 @@ class ConsentForm(form.SchemaForm):
                     form.mode(**{reason_id: 'display'})
                 locals()[reason_id] = schema.Choice(
                     title=reason.Title,
-                    description=reason.Description,
+                    description=reason.html_description,
                     values=('Allowed', 'Blocked'),
                     required=True,
                     default='Allowed' if reason.isProcessingAllowed(self.request, identifier=validated_user[1] if reason_match else None) else 'Blocked',

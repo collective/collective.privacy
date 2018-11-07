@@ -7,6 +7,8 @@ import time
 
 class BaseStorage(object):
 
+    uses_end_user_equipment = False
+
     def __init__(self, processing_reason, site_root, request):
         self.context = site_root
         self.request = request
@@ -17,6 +19,8 @@ class BaseStorage(object):
 
 
 class CookieStorage(BaseStorage):
+
+    uses_end_user_equipment = True
 
     def consentToProcessing(self, identifier):
         if identifier != self.getCurrentIdentifier():

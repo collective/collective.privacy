@@ -24,6 +24,15 @@ class ProcessingReason(object):
         )
 
     @property
+    def html_description(self):
+        description = self.Description
+        if self.optinoptout_storage.uses_end_user_equipment:
+            description += "<p>The preference you set here will be stored on your computer.<p>"
+        if not self.can_object:
+            description += "<p><strong>In order to comply with Data Protection laws, we cannot offer the ability to opt out of this.</strong><p>"
+        return description
+
+    @property
     def can_object(self):
         return self.lawful_basis.can_object
 
