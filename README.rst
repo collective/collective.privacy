@@ -60,6 +60,11 @@ You can then guard your uses of the data, for example:
     </div>
 
 
+Activate consent banner
+-----------------------
+
+To activate consent banner, set the registry record ``collective.privacy.solicit_consent`` value as True
+
 
 Legal basis
 -----------

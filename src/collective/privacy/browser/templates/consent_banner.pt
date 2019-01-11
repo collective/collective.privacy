@@ -26,9 +26,10 @@
                 var form = $(this).closest('form');
                 var data = form.serialize();
                 data += '&'+this.name+'=1';
+                var action = form.attr('action');
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8080/site/portal_privacy/bannerConsent",
+                    url: action,
                     data: data
                     }
                 ).done(function() {
