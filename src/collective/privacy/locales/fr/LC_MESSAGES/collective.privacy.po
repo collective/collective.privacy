@@ -1,149 +1,148 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-07-15 11:47+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: collective.privacy\n"
+"POT-Creation-Date: 2019-07-01 13:12+0000\n"
+"PO-Revision-Date: 2016-01-04 08:14+0000\n"
+"Last-Translator: Laurent Lasudry <laurent.lasudry@affinitic.be>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language-Code: fr\n"
+"Language-Name: French\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.privacy\n"
+"X-Is-Fallback-For: fr-be fr-ca fr-lu fr-mc fr-ch fr-fr\n"
+"Language: fr\n"
 
 #: ../profiles/default/registry.xml
 msgid "Allow logged in users to edit the privacy settings associated with the email address in their profile"
-msgstr ""
+msgstr "Permet aux utilisateurs connectés de modifier les paramètres de confidentialité associés à l'adresse courriel renseignée dans leur profil"
 
 #: ../plone_core/configure.zcml:17
 msgid "Allow other users to send content links"
-msgstr ""
+msgstr "Permet à d'autres utilisateurs d'envoyer des liens de contenu"
 
 #: ../zcml.py:37
 msgid "An object that provides IIdentifierFactory"
-msgstr ""
+msgstr "Un objet qui fournit IIdentifierFactory"
 
 #: ../zcml.py:43
 msgid "An object that provides IOptInOptOutStorage"
-msgstr ""
+msgstr "Un objet qui fournit IOptInOptOutStorage"
 
 #: ../plone_core/configure.zcml:27
 msgid "Analytics that are used to improve the website without                  directly tracking users"
-msgstr ""
+msgstr "Statistiques qui sont utilisées pour améliorer le site sans directement suivre les utilisateurs"
 
 #: ../configure.zcml:30
 msgid "Cookies to record your privacy preferences"
-msgstr ""
+msgstr "Cookies pour enregistrer vos préférences de confidentialité"
 
 #: ../zcml.py:54
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: ../profiles/default/registry.xml
 msgid "Display a banner soliciting consent for all items that require consent that the user hasn't already answered"
-msgstr ""
+msgstr "Affiche un bandeau demandant le consentement pour tous les éléments qui requièrent un consentement pour lequel l'utilisateur n'a pas encore répondu"
 
 #: ../profiles/default/registry.xml
 msgid "Display consent banner"
-msgstr ""
+msgstr "Affiche le bandeau de consentement"
 
 #: ../zcml.py:36
 msgid "How users will be identified"
-msgstr ""
+msgstr "Comment les utilisateurs seront identifiés"
 
 #: ../configure.zcml:40
 msgid "Installs the collective.privacy add-on."
-msgstr ""
+msgstr "Installe le module collective.privacy."
 
 #: ../zcml.py:61
 msgid "Is this used for marketing purposes?"
-msgstr ""
+msgstr "Est-ce utilisé à des fins commerciales ?"
 
 #: ../zcml.py:68
 msgid "Is this used for tracking purposes?"
-msgstr ""
+msgstr "Est-ce utilisé à des fins de suivi ?"
 
 #: ../zcml.py:30
 msgid "Legal basis"
-msgstr ""
+msgstr "Base légale"
 
 #: ../zcml.py:60
 msgid "Marketing"
-msgstr ""
+msgstr "Commercialisation"
 
 #: ../zcml.py:24
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: ../plone_core/configure.zcml:17
 msgid "Other users of the site can choose to share content through                  email. You may object to this processing of your email address                  to prevent these emails being sent to you by other users."
-msgstr ""
+msgstr "D'autres utilisateurs du site peuvent choisir de partager du contenu par courriel. Vous pouvez vous opposer à ce traitement de votre adresse courriel pour empêcher que d'autres utilisateurs vous envoient ces courriels."
 
 #: ../browser/overrides/Products.CMFPlone.skins.plone_form_scripts.validate_sendto.vpy:42
 msgid "Please correct the indicated errors."
-msgstr ""
+msgstr "Veuillez corriger les erreurs indiquées."
 
 #: ../browser/overrides/Products.CMFPlone.skins.plone_form_scripts.validate_sendto.vpy:27
 msgid "Please submit a valid email address."
-msgstr ""
+msgstr "Veuillez entrer une adresse courriel valide."
 
 #: ../browser/overrides/Products.CMFPlone.skins.plone_form_scripts.validate_sendto.vpy:16
 msgid "Please submit an email address."
-msgstr ""
+msgstr "Veuillez entrer une adresse courriel."
 
 #: ../zcml.py:42
 msgid "Storage for this data"
-msgstr ""
+msgstr "Stockage pour cette donnée"
 
 #: ../zcml.py:55
 msgid "The end-user visible description of this processing"
-msgstr ""
+msgstr "La description visible par l'utilisateur final pour ce traitement"
 
 #: ../zcml.py:49
 msgid "The end-user visible title for this processing"
-msgstr ""
+msgstr "Le titre visible par l'utilisateur final pour ce traitement"
 
 #: ../zcml.py:25
 msgid "The id used for this category."
-msgstr ""
+msgstr "L'identifiant utilisé pour cette catégorie."
 
 #: ../zcml.py:31
 msgid "The identifier of a legal basis that is used here"
-msgstr ""
+msgstr "L'identifiant de la base légale utilisée"
 
 #: ../configure.zcml:30
 msgid "These store if you've given consent or objected to various                  uses of your data. We need to store these to comply with data                  protection law."
-msgstr ""
+msgstr "Ils stockent si vous avez consenti ou si vous vous êtes opposés aux divers usages de vos données personnelles. Ce stockage est nécessaire pour se conformer à la loi de protection des données."
 
 #: ../browser/overrides/Products.CMFPlone.skins.plone_form_scripts.validate_sendto.vpy:21
 msgid "This person does not want to receive our emails"
-msgstr ""
+msgstr "Cette personne ne souhaite pas recevoir nos courriels"
 
 #: ../zcml.py:48
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 #: ../zcml.py:67
 msgid "Tracking"
-msgstr ""
+msgstr "Suivi"
 
 #: ../profiles/default/registry.xml
 msgid "Trust member emails"
-msgstr ""
+msgstr "Se fier aux adresses courriels des membres"
 
 #: ../configure.zcml:49
 msgid "Uninstalls the collective.privacy add-on."
-msgstr ""
+msgstr "Désinstalle le module collective.privacy."
 
 #: ../plone_core/configure.zcml:27
 msgid "Unintrusive analytics"
-msgstr ""
+msgstr "Statistiques non intrusives"
 
 #: ../configure.zcml:40
 msgid "collective.privacy"
