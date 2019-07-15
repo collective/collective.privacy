@@ -1,16 +1,17 @@
 <?xml version="1.0"?>
-<registry>
+<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          i18n:domain="collective.privacy">
   <record name="collective.privacy.trust_member_emails">
     <field type="plone.registry.field.Bool">
-      <title>Trust member emails</title>
-      <description>Allow logged in users to edit the privacy settings associated with the email address in their profile</description>
+      <title i18n:translate="">Trust member emails</title>
+      <description i18n:translate="">Allow logged in users to edit the privacy settings associated with the email address in their profile</description>
     </field>
     <value>False</value>
   </record>
   <record name="collective.privacy.solicit_consent">
     <field type="plone.registry.field.Bool">
-      <title>Display consent banner</title>
-      <description>Display a banner soliciting consent for all items that require consent that the user hasn't already answered</description>
+      <title i18n:translate="">Display consent banner</title>
+      <description i18n:translate="">Display a banner soliciting consent for all items that require consent that the user hasn't already answered</description>
     </field>
     <value>False</value>
   </record>
