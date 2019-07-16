@@ -178,6 +178,14 @@ This is a stub storage to be used with legal bases such as vital_interest where 
 to object to processing.
 
 
+Translations
+------------
+
+This product has been translated into
+
+- French
+
+
 Installation
 ------------
 
