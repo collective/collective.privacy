@@ -11,10 +11,7 @@ class SendToEmailValidator(validator.SimpleFieldValidator):
             raise Invalid(u'This person does not want to receive our emails')
 
 
-sendto_email = SendToEmailValidator(
-    None,
-    None,
-    None,
-    ISendToForm['send_to_address'],
-    None
+validator.WidgetValidatorDiscriminators(
+    SendToEmailValidator,
+    field=ISendToForm['send_to_address'],
 )
