@@ -47,7 +47,7 @@
 
   <adapter
     zcml:condition="have plone-5"
-    factory=".sendto.sendto_email"
+    factory=".sendto.SendToEmailValidator"
     />
 
 </configure>

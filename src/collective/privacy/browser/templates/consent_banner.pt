@@ -25,10 +25,11 @@
             $('.gdpr-actions input').on('click', function(evt) {
                 var form = $(this).closest('form');
                 var data = form.serialize();
+                var url = form.attr('action');
                 data += '&'+this.name+'=1';
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8080/site/portal_privacy/bannerConsent",
+                    url: url,
                     data: data
                     }
                 ).done(function() {
