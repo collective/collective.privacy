@@ -38,7 +38,9 @@ provides for embedding media might cause users to be tracked. The ZCML would be 
 
     <configure
         xmlns="http://namespaces.zope.org/zope"
-        xmlns:gdpr="http://namespaces.plone.org/gdpr">
+        xmlns:gdpr="http://namespaces.plone.org/gdpr"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        i18n_domain="collective.privacy">
         <gdpr:data_use_category
             name="show_example_media_embed"
             title="Embedded media from example.com"
@@ -52,6 +54,9 @@ provides for embedding media might cause users to be tracked. The ZCML would be 
 
 This would add a new item to the privacy controls that relies on consent to proccess data. This means that by
 default the permission is denied until an end user gives permission.
+
+Note that the i18n domain of your configuration must be `collective.privacy` if you want to translate titles
+and descriptions of your new data processing reasons. 
 
 You can then guard your uses of the data, for example:
 
