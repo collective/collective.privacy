@@ -11,7 +11,7 @@ from zope.interface import Interface
 class ConsentForm(form.SchemaForm):
     """ Define Form handling
 
-    This form can be accessed as http://yoursite/@@my-form
+    This form can be accessed as http://yoursite/@@consent
 
     """
 
