@@ -1,11 +1,22 @@
 # -*- coding: utf-8 -*-
+from collective.privacy import _
 from plone import api
 from plone.app.layout.viewlets import common as base
 from plone.directives import form
 from z3c.form import button
 from z3c.form.browser.radio import RadioFieldWidget
 from zope import schema
+from zope.i18n import translate
 from zope.interface import Interface
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
+
+consent_values = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'Allowed', title=_(u'Allowed')),
+        SimpleTerm(value=u'Blocked', title=_(u'Blocked')),
+    ]
+)
 
 
 class ConsentForm(form.SchemaForm):
@@ -17,8 +28,8 @@ class ConsentForm(form.SchemaForm):
 
     ignoreContext = True
 
-    label = u"Privacy settings"
-    description = u"Choose to opt in or out of various pieces of functionality"
+    label = _(u"Privacy settings")
+    description = _(u"Choose to opt in or out of various pieces of functionality")
 
     @property
     def action(self):
@@ -53,6 +64,7 @@ class ConsentForm(form.SchemaForm):
                 )
 
         class IConsentForm(Interface):
+            lang = api.portal.get_current_language()
             for reason_id, reason in sorted(reasons.items()):
                 reason_match = validated_user and validated_user[0] == reason.identifier_factory.__name__
                 if reason_match:
@@ -64,19 +76,22 @@ class ConsentForm(form.SchemaForm):
                 form.widget(reason_id, RadioFieldWidget)
                 if not reason.can_object:
                     form.mode(**{reason_id: 'display'})
+                translated_title = translate(_(reason.Title), target_language=lang)
                 locals()[reason_id] = schema.Choice(
-                    title=reason.Title,
+                    title=translated_title,
                     description=reason.html_description,
-                    values=('Allowed', 'Blocked'),
+                    vocabulary=consent_values,
                     required=True,
                     default='Allowed' if reason.isProcessingAllowed(self.request, identifier=validated_user[1] if reason_match else None) else 'Blocked',
                 )
+            del lang
+            del translated_title
             del reason_id
             del reason_match
             del reason
         return IConsentForm
 
-    @button.buttonAndHandler(u'Ok')
+    @button.buttonAndHandler(_(u'Ok'))
     def handleApply(self, action):
         data, errors = self.extractData()
         if errors:
@@ -91,9 +106,9 @@ class ConsentForm(form.SchemaForm):
             else:
                 privacy_tool.objectToProcessing(topic)
 
-        self.status = "Your preferences have been saved."
+        self.status = _(u"Your preferences have been saved.")
 
-    @button.buttonAndHandler(u"Cancel")
+    @button.buttonAndHandler(_(u"Cancel"))
     def handleCancel(self, action):
         """User cancelled. Redirect back to the front page.
         """

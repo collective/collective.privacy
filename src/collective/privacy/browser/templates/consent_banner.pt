@@ -1,4 +1,4 @@
-<div id="gdpr-consent-banner" tal:define="needed python:tuple(view.getConsentRequired())" tal:condition="needed" style="
+<div id="gdpr-consent-banner" i18n:domain="collective.privacy" tal:define="needed python:tuple(view.getConsentRequired())" tal:condition="needed" style="
     width: 100%;
     position: fixed;
     bottom: 0;
@@ -10,13 +10,13 @@
           tal:attributes="action string:${context/portal_privacy/absolute_url}/bannerConsent">
         <div class="hider" tal:define="extra_styles python:'' if repeat['reason'].index == 0 else 'display: none'" tal:attributes="style extra_styles">
         <div style="float: left; max-width: 60%;">
-            <strong tal:content="reason/Title"></strong>
-            <p tal:content="reason/Description"></p>
+            <strong tal:content="reason/Title" i18n:translate=""></strong>
+            <p tal:content="reason/Description" i18n:translate=""></p>
         </div>
         <input type="hidden" name="processing_reason" tal:attributes="value python:reason.__name__" />
         <div style="float: right; padding-top: 5px;" class="gdpr-actions">
-            <input style="padding: 5px; margin-right: 10px;" type="submit" name="consent" value="Allow" />
-            <input style="padding: 5px; margin-right: 10px;" type="submit" name="refuse" value="Refuse" />
+            <input style="padding: 5px; margin-right: 10px;" type="submit" name="consent" value="Allow" i18n:attributes="value"/>
+            <input style="padding: 5px; margin-right: 10px;" type="submit" name="refuse" value="Refuse" i18n:attributes="value"/>
         </div>
         </div>
     </form>
