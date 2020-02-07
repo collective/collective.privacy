@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.privacy\n"
-"POT-Creation-Date: 2020-01-24 14:23+0000\n"
+"POT-Creation-Date: 2020-02-07 11:26+0000\n"
 "PO-Revision-Date: 2016-01-04 08:14+0000\n"
 "Last-Translator: Laurent Lasudry <laurent.lasudry@affinitic.be>\n"
 "Language-Team: \n"
@@ -40,7 +40,7 @@ msgstr "Un objet qui fournit IIdentifierFactory"
 msgid "An object that provides IOptInOptOutStorage"
 msgstr "Un objet qui fournit IOptInOptOutStorage"
 
-#: ../plone_core/configure.zcml:27
+#: ../plone_core/configure.zcml:28
 msgid "Analytics that are used to improve the website without                  directly tracking users"
 msgstr "Statistiques qui sont utilisées pour améliorer le site sans directement suivre les utilisateurs"
 
@@ -55,6 +55,10 @@ msgstr "Annuler"
 #: ../browser/consent.py:32
 msgid "Choose to opt in or out of various pieces of functionality"
 msgstr "Choisissez si vous consentez ou non à certaines fonctionnalités"
+
+#: ../zcml.py:72
+msgid "Cookies names"
+msgstr ""
 
 #: ../configure.zcml:30
 msgid "Cookies to record your privacy preferences"
@@ -76,7 +80,7 @@ msgstr "Affiche le bandeau de consentement"
 msgid "How users will be identified"
 msgstr "Comment les utilisateurs seront identifiés"
 
-#: ../processing_reason.py:38
+#: ../processing_reason.py:41
 msgid "In order to comply with Data Protection laws, we cannot offer the ability to opt out of this."
 msgstr "Afin de nous conformer aux lois de protection des données personnelles, nous ne pouvons pas vous permettre de refuser ceci."
 
@@ -95,6 +99,10 @@ msgstr "Est-ce utilisé à des fins de suivi ?"
 #: ../zcml.py:28
 msgid "Legal basis"
 msgstr "Base légale"
+
+#: ../zcml.py:73
+msgid "List of cookies for this use : separeted by ',', wildcard (*) accepted"
+msgstr "Liste des cookies pour cet usage : séparés par des ',', caractère générique (*) accepté"
 
 #: ../browser/templates/consent_banner.pt:28
 msgid "Manage privacy settings"
@@ -156,7 +164,7 @@ msgstr "L'identifiant utilisé pour cette catégorie."
 msgid "The identifier of a legal basis that is used here"
 msgstr "L'identifiant de la base légale utilisée"
 
-#: ../processing_reason.py:34
+#: ../processing_reason.py:37
 msgid "The preference you set here will be stored on your computer."
 msgstr "La préférence choisie sera stockée sur votre ordinateur."
 
@@ -184,7 +192,7 @@ msgstr "Se fier aux adresses courriels des membres"
 msgid "Uninstalls the collective.privacy add-on."
 msgstr "Désinstalle le module collective.privacy."
 
-#: ../plone_core/configure.zcml:27
+#: ../plone_core/configure.zcml:28
 msgid "Unintrusive analytics"
 msgstr "Statistiques non intrusives"
 
