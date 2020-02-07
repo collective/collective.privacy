@@ -58,7 +58,7 @@ msgstr "Choisissez si vous consentez ou non à certaines fonctionnalités"
 
 #: ../zcml.py:72
 msgid "Cookies names"
-msgstr ""
+msgstr "Nom des cookies"
 
 #: ../configure.zcml:30
 msgid "Cookies to record your privacy preferences"
