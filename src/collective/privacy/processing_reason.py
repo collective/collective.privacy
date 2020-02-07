@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+from collective.privacy import _
+from plone import api
 from zope.component.hooks import getSiteManager
+from zope.i18n import translate
 
 
 class ProcessingReason(object):
@@ -25,11 +28,16 @@ class ProcessingReason(object):
 
     @property
     def html_description(self):
-        description = self.Description
+        lang = api.portal.get_current_language()
+        description = translate(_(self.Description), target_language=lang)
         if self.optinoptout_storage.uses_end_user_equipment:
-            description += "<p>The preference you set here will be stored on your computer.<p>"
+            text = _(u"The preference you set here will be stored on your computer.")
+            translated_text = translate(text, target_language=lang)
+            description += u"<p>{0}<p>".format(translated_text)
         if not self.can_object:
-            description += "<p><strong>In order to comply with Data Protection laws, we cannot offer the ability to opt out of this.</strong><p>"
+            text = _(u"In order to comply with Data Protection laws, we cannot offer the ability to opt out of this.")
+            translated_text = translate(text, target_language=lang)
+            description += u"<p><strong>{0}</strong><p>".format(translated_text)
         return description
 
     @property
