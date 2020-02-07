@@ -68,17 +68,23 @@ class IDataUseCategory(Interface):
         default=False,
     )
 
+    cookies = TextLine(
+        title=_("Cookies names"),
+        description=_("List of cookies for this use : separeted by ',', wildcard (*) accepted"),
+        required=False,
+    )
 
-def data_use_category(_context, name, title, description, legal_basis, storage, identifier, marketing=False, tracking=False):
+
+def data_use_category(_context, name, title, description, legal_basis, storage, identifier, marketing=False, tracking=False, cookies=u""):
     _context.action(
         discriminator=('processing_reason', name),
         callable=register_data_use_category,
-        args=(name, title, description, legal_basis, storage, identifier, marketing, tracking),
+        args=(name, title, description, legal_basis, storage, identifier, marketing, tracking, cookies),
     )
     return
 
 
-def register_data_use_category(name, title, description, legal_basis, storage, identifier, marketing=False, tracking=False):
+def register_data_use_category(name, title, description, legal_basis, storage, identifier, marketing=False, tracking=False, cookies=u""):
     manager = getSiteManager()
     legal_basis_obj = manager.queryUtility(ILawfulBasis, name=legal_basis)
     if legal_basis_obj is None:
@@ -99,5 +105,6 @@ def register_data_use_category(name, title, description, legal_basis, storage, i
         lawful_basis=legal_basis_obj,
         optinoptout_storage=storage,
         identifier_factory=identifier,
+        cookies=cookies,
     )
     manager.registerUtility(reason, IProcessingReason, name)
