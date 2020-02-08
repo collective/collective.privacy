@@ -97,6 +97,10 @@ msgstr ""
 msgid "Legal basis"
 msgstr ""
 
+#: ../browser/templates/consent_banner.pt:28
+msgid "Manage privacy settings"
+msgstr ""
+
 #: ../zcml.py:58
 msgid "Marketing"
 msgstr ""

@@ -96,6 +96,10 @@ msgstr "Est-ce utilisé à des fins de suivi ?"
 msgid "Legal basis"
 msgstr "Base légale"
 
+#: ../browser/templates/consent_banner.pt:28
+msgid "Manage privacy settings"
+msgstr "Gérer mes paramètres de confidentialité"
+
 #: ../zcml.py:58
 msgid "Marketing"
 msgstr "Commercialisation"
