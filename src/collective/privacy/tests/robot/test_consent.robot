@@ -34,33 +34,42 @@ Test Teardown  Close all browsers
 
 *** Test Cases ***************************************************************
 
-Scenario: As a member I want to be able to log into the website
-  [Documentation]  Example of a BDD-style (Behavior-driven development) test.
-  Given a login form
-   When I enter valid credentials
-   Then I am logged in
+Scenario: I see the consent banner and I can consent to data use
+  Given a Plone site in anonymous
+   When consent has been given to My embedded media
+   Then The consent banner is not visible
+
+Scenario: I can retract my consent via consent form (banner don't show again)
+  Given a Plone site in anonymous
+    and consent has been given to My embedded media
+   When I retract my consent
+   Then The consent banner is not visible
 
 
 *** Keywords *****************************************************************
 
 # --- Given ------------------------------------------------------------------
 
-a login form
-  Go To  ${PLONE_URL}/login_form
-  Wait until page contains  Login Name
-  Wait until page contains  Password
+a Plone site in anonymous
+  Go To  ${PLONE_URL}
 
 
 # --- WHEN -------------------------------------------------------------------
 
-I enter valid credentials
-  Input Text  __ac_name  admin
-  Input Text  __ac_password  secret
-  Click Button  Log in
+consent has been given to My embedded media
+  Go To  ${PLONE_URL}
+  Element Should be visible  css=#gdpr-consent-banner
+  Click Button  Allow
+
+I retract my consent
+  Go To  ${PLONE_URL}/@@consent
+  Click Element  xpath=//input[@name="form.widgets.show_media_embed" and @value="Blocked"]
+  Click Button  Ok
 
 
 # --- THEN -------------------------------------------------------------------
 
-I am logged in
-  Wait until page contains  You are now logged in
-  Page should contain  You are now logged in
+The consent banner is not visible
+  Element Should not be visible  css=#gdpr-consent-banner
+  Go To  ${PLONE_URL}
+  Element Should not be visible  css=#gdpr-consent-banner
