@@ -31,6 +31,6 @@ class TestCookies(unittest.TestCase):
         for cookie_name in COOKIES:
             self.assertIn(cookie_name, cookies)
             data = cookies.get(cookie_name)
-            self.assertEquals(data["value"], "deleted")
-            self.assertEquals(data["max_age"], 0)
-            self.assertEquals(data["expires"], "Wed, 31-Dec-97 23:59:59 GMT")
+            self.assertEqual(data["value"], "deleted")
+            self.assertEqual(data["max_age"], 0)
+            self.assertEqual(data["expires"], "Wed, 31-Dec-97 23:59:59 GMT")
