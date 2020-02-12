@@ -1,0 +1,200 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: collective.privacy\n"
+"POT-Creation-Date: 2020-01-24 14:23+0000\n"
+"PO-Revision-Date: 2020-02-12 14:00+0000\n"
+"Last-Translator: Laurent Lasudry <laurent.lasudry@affinitic.be>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: nl\n"
+"Language-Name: Dutch\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.privacy\n"
+"Language: nl\n"
+
+#: ../browser/templates/consent_banner.pt:18
+msgid "Allow"
+msgstr "Toestaan"
+
+#: ../profiles/default/registry.xml
+msgid "Allow logged in users to edit the privacy settings associated with the email address in their profile"
+msgstr "Aangemelde gebruikers toestaan om de privacyinstellingen die aan het e-mailadres in hun profiel zijn gekoppeld, te bewerken."
+
+#: ../plone_core/configure.zcml:17
+msgid "Allow other users to send content links"
+msgstr "Andere gebruikers toestaan om inhoudelijke links te sturen"
+
+#: ../browser/consent.py:16
+msgid "Allowed"
+msgstr "Toegestaan"
+
+#: ../zcml.py:35
+msgid "An object that provides IIdentifierFactory"
+msgstr "Een object dat IIdentifierFactory aanbiedt"
+
+#: ../zcml.py:41
+msgid "An object that provides IOptInOptOutStorage"
+msgstr "Een object dat IOptInOptOutStorage aanbiedt"
+
+#: ../plone_core/configure.zcml:27
+msgid "Analytics that are used to improve the website without                  directly tracking users"
+msgstr "Analytics die worden gebruikt om de website te verbeteren zonder de gebruikers rechtstreeks te traceren"
+
+#: ../browser/consent.py:17
+msgid "Blocked"
+msgstr "Geblokkeerd"
+
+#: ../browser/consent.py:111
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: ../browser/consent.py:32
+msgid "Choose to opt in or out of various pieces of functionality"
+msgstr "Kies voor opt-in of opt-out voor verschillende functionaliteiten"
+
+#: ../configure.zcml:30
+msgid "Cookies to record your privacy preferences"
+msgstr "Cookies om uw privacyvoorkeuren te bewaren"
+
+#: ../zcml.py:52
+msgid "Description"
+msgstr "Beschrijving"
+
+#: ../profiles/default/registry.xml
+msgid "Display a banner soliciting consent for all items that require consent that the user hasn't already answered"
+msgstr "Een banner weergeven waarin om toestemming wordt gevraagd voor alle items waarvoor toestemming nodig is en waarvoor de gebruiker nog geen antwoord heeft gegeven"
+
+#: ../profiles/default/registry.xml
+msgid "Display consent banner"
+msgstr "Toestemmingsbanner weergeven"
+
+#: ../zcml.py:34
+msgid "How users will be identified"
+msgstr "Hoe gebruikers worden geidentificeerd"
+
+#: ../processing_reason.py:38
+msgid "In order to comply with Data Protection laws, we cannot offer the ability to opt out of this."
+msgstr "Om te voldoen aan de wet op de gegevensbescherming, kunnen we hiervoor niet de mogelijkheid van opt-out bieden."
+
+#: ../configure.zcml:40
+msgid "Installs the collective.privacy add-on."
+msgstr ""
+
+#: ../zcml.py:59
+msgid "Is this used for marketing purposes?"
+msgstr "Wordt dit gebruikt voor marketingdoeleinden?"
+
+#: ../zcml.py:66
+msgid "Is this used for tracking purposes?"
+msgstr "Wordt dit gebruikt voor traceringsdoeleinden?"
+
+#: ../zcml.py:28
+msgid "Legal basis"
+msgstr "Wettelijke grondslag"
+
+#: ../browser/templates/consent_banner.pt:28
+msgid "Manage privacy settings"
+msgstr "Privacyinstellingen beheren"
+
+#: ../zcml.py:58
+msgid "Marketing"
+msgstr "Marketing"
+
+#: ../zcml.py:22
+msgid "Name"
+msgstr "Naam"
+
+#: ../browser/consent.py:94
+msgid "Ok"
+msgstr "Ok"
+
+#: ../plone_core/configure.zcml:17
+msgid "Other users of the site can choose to share content through                  email. You may object to this processing of your email address                  to prevent these emails being sent to you by other users."
+msgstr "Andere gebruikers van de site kunnen ervoor kiezen om inhoud via e-mail te delen. U kunt bezwaar maken tegen deze verwerking van uw e-mailadres om te voorkomen dat deze e-mails door andere gebruikers naar u worden verzonden."
+
+#: ../browser/overrides/Products.CMFPlone.skins.plone_form_scripts.validate_sendto.vpy:42
+msgid "Please correct the indicated errors."
+msgstr "Verbeter de aangegeven fouten."
+
+#: ../browser/overrides/Products.CMFPlone.skins.plone_form_scripts.validate_sendto.vpy:27
+msgid "Please submit a valid email address."
+msgstr "Geef een geldig e-mailadres op."
+
+#: ../browser/overrides/Products.CMFPlone.skins.plone_form_scripts.validate_sendto.vpy:16
+msgid "Please submit an email address."
+msgstr "Geef een e-mailadres op."
+
+#: ../browser/consent.py:31
+msgid "Privacy settings"
+msgstr "Privacyinstellingen"
+
+#: ../browser/templates/consent_banner.pt:19
+msgid "Refuse"
+msgstr "Weigeren"
+
+#: ../zcml.py:40
+msgid "Storage for this data"
+msgstr "Opslag voor deze gegevens"
+
+#: ../zcml.py:53
+msgid "The end-user visible description of this processing"
+msgstr "De beschrijving van deze verwerking zichtbaar voor eindgebruiker"
+
+#: ../zcml.py:47
+msgid "The end-user visible title for this processing"
+msgstr "De titel van deze verwerking zichtbaar voor eindgebruiker"
+
+#: ../zcml.py:23
+msgid "The id used for this category."
+msgstr "Het id dat voor deze categorie wordt gebruikt."
+
+#: ../zcml.py:29
+msgid "The identifier of a legal basis that is used here"
+msgstr "De identificatiecode van een wettelijke grondslag die hier wordt gebruikt"
+
+#: ../processing_reason.py:34
+msgid "The preference you set here will be stored on your computer."
+msgstr "De voorkeur die u hier instelt, wordt op uw computer opgeslagen."
+
+#: ../configure.zcml:30
+msgid "These store if you've given consent or objected to various                  uses of your data. We need to store these to comply with data                  protection law."
+msgstr "Deze worden opgeslagen als u toestemming hebt gegeven of bezwaar hebt gemaakt tegen verschillende vormen van gebruik van uw gegevens. We moeten deze opslaan om te voldoen aan de wet op de gegevensbescherming."
+
+#: ../browser/overrides/Products.CMFPlone.skins.plone_form_scripts.validate_sendto.vpy:21
+msgid "This person does not want to receive our emails"
+msgstr "Deze persoon wil onze e-mails niet ontvangen"
+
+#: ../zcml.py:46
+msgid "Title"
+msgstr "Titel"
+
+#: ../zcml.py:65
+msgid "Tracking"
+msgstr "Tracking"
+
+#: ../profiles/default/registry.xml
+msgid "Trust member emails"
+msgstr "e-mails van leden vertrouwen"
+
+#: ../configure.zcml:49
+msgid "Uninstalls the collective.privacy add-on."
+msgstr ""
+
+#: ../plone_core/configure.zcml:27
+msgid "Unintrusive analytics"
+msgstr "Niet-intrusieve analytics"
+
+#: ../browser/consent.py:109
+msgid "Your preferences have been saved."
+msgstr "Uw voorkeuren werden opgeslagen."
+
+#: ../configure.zcml:40
+msgid "collective.privacy"
+msgstr ""
+
+#: ../configure.zcml:49
+msgid "collective.privacy (uninstall)"
+msgstr ""
