@@ -9,7 +9,7 @@ from z3c.form.browser.radio import RadioFieldWidget
 from zope import schema
 from zope.i18n import translate
 from zope.interface import Interface
-from zope.interface import implements
+from zope.interface import implementer
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -21,13 +21,13 @@ consent_values = SimpleVocabulary(
 )
 
 
+@implementer(IConsentFormView)
 class ConsentForm(form.SchemaForm):
     """ Define Form handling
 
     This form can be accessed as http://yoursite/@@consent
 
     """
-    implements(IConsentFormView)
     ignoreContext = True
 
     label = _(u"Privacy settings")
