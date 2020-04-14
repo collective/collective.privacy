@@ -9,6 +9,10 @@ class ICollectivePrivacyLayer(IDefaultBrowserLayer):
     """Marker interface that defines a browser layer."""
 
 
+class IConsentFormView(Interface):
+    """Marker interface for consent form."""
+
+
 class IPrivacyTool(Interface):
     pass
 

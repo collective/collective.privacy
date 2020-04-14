@@ -37,13 +37,18 @@ Test Teardown  Close all browsers
 Scenario: I see the consent banner and I can consent to data use
   Given a Plone site in anonymous
    When consent has been given to My embedded media
-   Then The consent banner is not visible
+   Then The consent banner is never visible
+
+Scenario: I don't see the consent banner on consent form
+  Given a Plone site in anonymous
+   When I click on privacy settings managements
+   Then The consent banner is not visible on that page
 
 Scenario: I can retract my consent via consent form (banner don't show again)
   Given a Plone site in anonymous
     and consent has been given to My embedded media
    When I retract my consent
-   Then The consent banner is not visible
+   Then The consent banner is never visible
 
 
 *** Keywords *****************************************************************
@@ -57,9 +62,11 @@ a Plone site in anonymous
 # --- WHEN -------------------------------------------------------------------
 
 consent has been given to My embedded media
-  Go To  ${PLONE_URL}
   Element Should be visible  css=#gdpr-consent-banner
   Click Button  Allow
+
+I click on privacy settings managements
+  Click Link  Manage privacy settings
 
 I retract my consent
   Go To  ${PLONE_URL}/@@consent
@@ -69,7 +76,10 @@ I retract my consent
 
 # --- THEN -------------------------------------------------------------------
 
-The consent banner is not visible
+The consent banner is not visible on that page
+  Element Should not be visible  css=#gdpr-consent-banner
+
+The consent banner is never visible
   Element Should not be visible  css=#gdpr-consent-banner
   Go To  ${PLONE_URL}
   Element Should not be visible  css=#gdpr-consent-banner

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.privacy import _
+from collective.privacy.interfaces import IConsentFormView
 from plone import api
 from plone.app.layout.viewlets import common as base
 from plone.directives import form
@@ -8,6 +9,7 @@ from z3c.form.browser.radio import RadioFieldWidget
 from zope import schema
 from zope.i18n import translate
 from zope.interface import Interface
+from zope.interface import implements
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -25,7 +27,7 @@ class ConsentForm(form.SchemaForm):
     This form can be accessed as http://yoursite/@@consent
 
     """
-
+    implements(IConsentFormView)
     ignoreContext = True
 
     label = _(u"Privacy settings")
@@ -119,6 +121,9 @@ class ConsentBannerViewlet(base.ViewletBase):
     def getConsentRequired(self):
         found = []
         if not api.portal.get_registry_record('collective.privacy.solicit_consent'):
+            return found
+        if IConsentFormView.providedBy(self.view):
+            # Don't show consent banner on consent form
             return found
         consent_reasons = [
             reason
