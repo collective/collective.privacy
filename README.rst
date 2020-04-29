@@ -218,6 +218,18 @@ Install collective.privacy by adding it to your buildout::
 
 and then running ``bin/buildout``
 
+Varnish
+-------
+
+If you use this product combined with Varnish ensure that your Varnish config does not remove cookies for requests where
+caching should be ignored
+
+Example of config::
+
+    if (req.http.Cache-Control ~ "(private|no-cache|no-store)" || req.http.Pragma == "no-cache") {
+        return (pass);
+    }
+
 
 Thanks
 ------
@@ -232,7 +244,6 @@ Contribute
 
 - Issue Tracker: https://github.com/collective/collective.privacy/issues
 - Source Code: https://github.com/collective/collective.privacy
-- Documentation: https://docs.plone.org/foo/bar
 
 
 Support
