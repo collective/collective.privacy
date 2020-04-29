@@ -35,4 +35,11 @@
     class=".consent.ConsentBannerViewlet"
     />
 
+  <browser:page
+    for="*"
+    name="consent-json"
+    permission="zope2.View"
+    class=".consent.ConsentJSON"
+    />
+
 </configure>

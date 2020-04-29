@@ -4,6 +4,9 @@ Changelog
 1.0a2 (unreleased)
 ------------------
 
+- Avoid caching for consent banner
+  [mpeeters]
+
 - Don't show consent banner on consent form
   [llasudry]
 

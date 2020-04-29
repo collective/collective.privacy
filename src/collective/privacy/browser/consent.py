@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from Products.Five import BrowserView
 from collective.privacy import _
 from collective.privacy.interfaces import IConsentFormView
 from plone import api
@@ -12,6 +13,8 @@ from zope.interface import Interface
 from zope.interface import implementer
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+
+import json
 
 consent_values = SimpleVocabulary(
     [
@@ -134,13 +137,29 @@ class ConsentForm(form.SchemaForm):
 
 
 class ConsentBannerViewlet(base.ViewletBase):
-    def getConsentRequired(self):
-        found = []
+    def is_consent_required(self):
         if not api.portal.get_registry_record("collective.privacy.solicit_consent"):
-            return found
+            return False
         if IConsentFormView.providedBy(self.view):
             # Don't show consent banner on consent form
-            return found
+            return False
+        consent_reasons = [
+            reason
+            for reason in self.context.portal_privacy.getAllReasons().values()
+            if reason.lawful_basis.__name__ == "consent"
+        ]
+        return len(consent_reasons) > 0
+
+
+class ConsentJSON(BrowserView):
+    """
+    This view return a json for opinions required for the current user based on
+    collective.privacy cookie
+    """
+
+    def __call__(self):
+        found = []
+        self.request.response.setHeader("Content-type", "application/json")
         consent_reasons = [
             reason
             for reason in self.context.portal_privacy.getAllReasons().values()
@@ -149,8 +168,16 @@ class ConsentBannerViewlet(base.ViewletBase):
         for reason in consent_reasons:
             try:
                 if not reason.isOpinionExpressed(self.request):
-                    found.append(reason)
+                    found.append(
+                        {
+                            "Title": translate(_(reason.Title), context=self.request),
+                            "Description": translate(
+                                _(reason.Description), context=self.request
+                            ),
+                            "name": reason.__name__,
+                        }
+                    )
             except Exception:
                 # FIXME
                 pass
-        return found
+        return json.dumps(found)
