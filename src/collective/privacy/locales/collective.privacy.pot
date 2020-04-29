@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-01-24 14:23+0000\n"
+"POT-Creation-Date: 2020-02-07 11:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,7 +41,7 @@ msgstr ""
 msgid "An object that provides IOptInOptOutStorage"
 msgstr ""
 
-#: ../plone_core/configure.zcml:27
+#: ../plone_core/configure.zcml:28
 msgid "Analytics that are used to improve the website without                  directly tracking users"
 msgstr ""
 
@@ -55,6 +55,10 @@ msgstr ""
 
 #: ../browser/consent.py:32
 msgid "Choose to opt in or out of various pieces of functionality"
+msgstr ""
+
+#: ../zcml.py:72
+msgid "Cookies names"
 msgstr ""
 
 #: ../configure.zcml:30
@@ -77,7 +81,7 @@ msgstr ""
 msgid "How users will be identified"
 msgstr ""
 
-#: ../processing_reason.py:38
+#: ../processing_reason.py:41
 msgid "In order to comply with Data Protection laws, we cannot offer the ability to opt out of this."
 msgstr ""
 
@@ -97,9 +101,12 @@ msgstr ""
 msgid "Legal basis"
 msgstr ""
 
+#: ../zcml.py:73
+msgid "List of cookies for this use : separeted by ',', wildcard (*) accepted"
+msgstr ""
+
 #: ../browser/templates/consent_banner.pt:28
 msgid "Manage privacy settings"
-msgstr ""
 
 #: ../zcml.py:58
 msgid "Marketing"
@@ -157,7 +164,7 @@ msgstr ""
 msgid "The identifier of a legal basis that is used here"
 msgstr ""
 
-#: ../processing_reason.py:34
+#: ../processing_reason.py:37
 msgid "The preference you set here will be stored on your computer."
 msgstr ""
 
@@ -185,7 +192,7 @@ msgstr ""
 msgid "Uninstalls the collective.privacy add-on."
 msgstr ""
 
-#: ../plone_core/configure.zcml:27
+#: ../plone_core/configure.zcml:28
 msgid "Unintrusive analytics"
 msgstr ""
 

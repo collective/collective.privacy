@@ -24,6 +24,7 @@
     legal_basis="legitimate_interest"
     identifier="collective.privacy.identifiers.CookieIdentifier"
     storage="collective.privacy.storage.CookieStorage"
+    cookies="_ga,_gat_gtag_*,_gid"
     />
 
   <browser:viewlet

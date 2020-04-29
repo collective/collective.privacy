@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from plone import api
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
@@ -15,11 +16,12 @@ class CollectivePrivacyLayer(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        self.loadZCML(package=collective.privacy, name="meta.zcml")
-        self.loadZCML(package=collective.privacy)
+        self.loadZCML(package=collective.privacy, name="testing.zcml")
+        self.loadZCML(package=collective.privacy.tests, name="data_use.zcml")
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'collective.privacy:default')
+        api.portal.set_registry_record("collective.privacy.solicit_consent", True)
 
 
 COLLECTIVE_PRIVACY_FIXTURE = CollectivePrivacyLayer()

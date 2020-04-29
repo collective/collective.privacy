@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.privacy import _
+from collective.privacy.utils import match_string
 from plone import api
 from zope.component.hooks import getSiteManager
 from zope.i18n import translate
@@ -12,13 +13,15 @@ class ProcessingReason(object):
                  optinoptout_storage,
                  lawful_basis,
                  title,
-                 description):
+                 description,
+                 cookies):
         self.__name__ = id
         self.identifier_factory = identifier_factory
         self.optinoptout_storage = optinoptout_storage
         self.lawful_basis = lawful_basis
         self.Title = title
         self.Description = description
+        self.cookies = cookies
 
     def __repr__(self):
         return "<ProcessingReason {} using {}>".format(
@@ -67,6 +70,16 @@ class ProcessingReason(object):
         """Mark the current user as having refused permission to process"""
         if self.can_object:
             self._setValue(request, user, False)
+            if not self.cookies:
+                return
+            existing_cookies = request.cookies
+            cookies_list = self.cookies.split(",")
+            for cookie in cookies_list:
+                cookie_name = cookie.strip()
+                for existing_cookie_name in existing_cookies:
+                    if not match_string(cookie_name, existing_cookie_name):
+                        continue
+                    request.response.expireCookie(existing_cookie_name, path="/")
         else:
             raise ValueError("Cannot object to processing {!r}".format(self))
 

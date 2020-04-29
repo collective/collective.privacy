@@ -52,6 +52,7 @@ provides for embedding media might cause users to be tracked. The ZCML would be 
             legal_basis="consent"
             identifier="collective.privacy.identifiers.CookieIdentifier"
             storage="collective.privacy.storage.CookieStorage"
+            cookies="media_cookie_*,other_cookie"
             />
     </configure>
 
@@ -184,6 +185,13 @@ collective.privacy.storage.NoChoiceStorage
 
 This is a stub storage to be used with legal bases such as vital_interest where the user has no option
 to object to processing.
+
+
+Cookies
+-------
+
+This attribute lists the cookies that should be deleted if the user objects to the use of the corresponding data processing.
+It is optional and may contain wildcard (*).
 
 
 Translations

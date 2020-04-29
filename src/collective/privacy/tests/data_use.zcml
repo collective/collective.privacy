@@ -1,0 +1,12 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:gdpr="http://namespaces.plone.org/gdpr">
+  <gdpr:data_use_category
+    name="show_media_embed"
+    title="My embedded media"
+    description=""
+    legal_basis="consent"
+    identifier="collective.privacy.identifiers.CookieIdentifier"
+    storage="collective.privacy.storage.CookieStorage"
+    cookies="foo*,bar"
+    />
+</configure>
