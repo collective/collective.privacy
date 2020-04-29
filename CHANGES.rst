@@ -1,8 +1,55 @@
 Changelog
 =========
 
+1.0a2 (unreleased)
+------------------
 
-1.0a1 (unreleased)
+- Don't show consent banner on consent form
+  [llasudry]
+
+- Allow to delete specified cookies if user objects to their use
+  [llasudry]
+
+- Add Dutch translation
+  [llasudry]
+
+- Add link to manage privacy settings
+  [llasudry]
+
+- Translate all messages / data processing reasons
+  [llasudry]
+
+- Fix consent submission
+  [mpeeters]
+
+- Fix validator for sendto_email
+  [mpeeters]
+
+- Add French translations
+  [llasudry]
+
+- Add code to give better warnings around cookie use
+  [MatthewWilkes]
+
+- Provide uninstall steps in profile (#1)
+  [Mikel Larreategi]
+
+- Possible fix for diazo compatibility
+  [MatthewWilkes]
+
+- Unintrusive analytics are legitimate
+  [MatthewWilkes]
+
+- Remove unneeded skins call
+  [MatthewWilkes]
+
+- Add missing files
+  [MatthewWilkes]
+
+- Remove unneeded deps
+  [MatthewWilkes]
+
+1.0a1 (2018-08-25)
 ------------------
 
 - Initial release.
