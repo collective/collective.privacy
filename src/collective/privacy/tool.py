@@ -15,15 +15,16 @@ import uuid
 
 
 class ProcessingReason(SimpleItem):
-
     def __init__(self, id, *args, **kwargs):
         super(ProcessingReason, self).__init__(*args, **kwargs)
         self.id = id
-        self.consented = OOBTree()  # LFBtree only supports some longs, not all and there is no OFBTree
+        self.consented = (
+            OOBTree()
+        )  # LFBtree only supports some longs, not all and there is no OFBTree
         self.objected = OOBTree()
 
     def __repr__(self):
-        return "<ProcessingReason at {}>".format('/'.join(self.absolute_path()))
+        return "<ProcessingReason at {}>".format("/".join(self.absolute_path()))
 
     def getId(self):
         return self.id
@@ -36,18 +37,18 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
     """ Manage through-the-web signup policies.
     """
 
-    meta_type = 'Plone Privacy Tool'
+    meta_type = "Plone Privacy Tool"
     _product_interfaces = (IProcessingReason,)
     security = ClassSecurityInfo()
-    toolicon = 'skins/plone_images/pencil_icon.png'
-    id = 'portal_privacy'
+    toolicon = "skins/plone_images/pencil_icon.png"
+    id = "portal_privacy"
     plone_tool = 1
 
     def _setId(self, *args, **kwargs):
         return
 
     def getId(self):
-        return 'portal_privacy'
+        return "portal_privacy"
 
     def __init__(self, *args, **kwargs):
         super(PrivacyTool, self).__init__(self, *args, **kwargs)
@@ -57,21 +58,19 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
     def signIdentifier(self, processing_reason_id, user=None):
         processing_reason = self.getProcessingReason(processing_reason_id)
         if user is None:
-            identifier = processing_reason.identifier_factory.getIdentifierForCurrentRequest(self.REQUEST)
+            identifier = processing_reason.identifier_factory.getIdentifierForCurrentRequest(
+                self.REQUEST
+            )
         else:
             identifier = processing_reason.identifier_factory.getIdentifierForUser(user)
         if identifier is None:
             raise ValueError("Couldn't identify user")
-        return hmac.new(
-            self._signing_secret,
-            msg=str(identifier)
-        ).hexdigest()
+        return hmac.new(self._signing_secret, msg=str(identifier)).hexdigest()
 
     @security.private
     def verifyIdentifier(self, signed, processing_reason_id, user=None):
         return hmac.compare_digest(
-            signed,
-            self.signIdentifier(processing_reason_id, user)
+            signed, self.signIdentifier(processing_reason_id, user)
         )
 
     @security.private
@@ -81,7 +80,7 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
             site.absolute_url(),
             processing_reason_id,
             user,
-            self.signIdentifier(processing_reason_id, user)
+            self.signIdentifier(processing_reason_id, user),
         )
 
     @security.public

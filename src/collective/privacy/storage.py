@@ -15,7 +15,9 @@ class BaseStorage(object):
         self.processing_reason = processing_reason
 
     def getCurrentIdentifier(self):
-        return self.processing_reason.identifier_factory.getIdentifierForCurrentRequest(self.request)
+        return self.processing_reason.identifier_factory.getIdentifierForCurrentRequest(
+            self.request
+        )
 
 
 class CookieStorage(BaseStorage):
@@ -24,28 +26,34 @@ class CookieStorage(BaseStorage):
 
     def consentToProcessing(self, identifier):
         if identifier != self.getCurrentIdentifier():
-            raise ValueError("Cannot consent to processing for a user other than the current")
+            raise ValueError(
+                "Cannot consent to processing for a user other than the current"
+            )
         return self._setProcessingCookie(True)
 
     def objectToProcessing(self, identifier):
         if identifier != self.getCurrentIdentifier():
-            raise ValueError("Cannot object to processing for a user other than the current")
+            raise ValueError(
+                "Cannot object to processing for a user other than the current"
+            )
         return self._setProcessingCookie(False)
 
     def getProcessingStatus(self, identifier):
         """Returns True if user has consented, False if they've objected and None if
         there is no data"""
         if identifier != self.getCurrentIdentifier():
-            raise ValueError("Cannot check processing data outside an active request for the user concerned")
-        if 'dataprotection' in self.request.RESPONSE.cookies:
+            raise ValueError(
+                "Cannot check processing data outside an active request for the user concerned"
+            )
+        if "dataprotection" in self.request.RESPONSE.cookies:
             # If this request changed the settings we use that in preference of the old ones
-            cookies = self.request.RESPONSE.cookies.get('dataprotection').get('value')
+            cookies = self.request.RESPONSE.cookies.get("dataprotection").get("value")
         else:
-            cookies = self.request.cookies.get('dataprotection', '')
-        cookies = cookies.split(':')
-        if '{}|1'.format(self.processing_reason.__name__) in cookies:
+            cookies = self.request.cookies.get("dataprotection", "")
+        cookies = cookies.split(":")
+        if "{}|1".format(self.processing_reason.__name__) in cookies:
             return True
-        elif '{}|0'.format(self.processing_reason.__name__) in cookies:
+        elif "{}|0".format(self.processing_reason.__name__) in cookies:
             return False
         else:
             return None
@@ -53,32 +61,29 @@ class CookieStorage(BaseStorage):
     def _setProcessingCookie(self, shouldProcess):
         topic = self.processing_reason.__name__
         try:
-            existing_cookies = self.request.RESPONSE.cookies['dataprotection']['value']
+            existing_cookies = self.request.RESPONSE.cookies["dataprotection"]["value"]
         except KeyError:
-            existing_cookies = self.request.cookies.get('dataprotection', '')
-        existing_cookies = existing_cookies.split(':')
+            existing_cookies = self.request.cookies.get("dataprotection", "")
+        existing_cookies = existing_cookies.split(":")
         existing_cookies = filter(None, existing_cookies)
         existing_cookies = filter(
-            lambda cookie: '{}|'.format(topic) not in cookie,
-            existing_cookies
+            lambda cookie: "{}|".format(topic) not in cookie, existing_cookies
         )
-        new_cookie = '{}|{:d}'.format(topic, int(shouldProcess))
-        cookie = ':'.join(existing_cookies + [new_cookie])
+        new_cookie = "{}|{:d}".format(topic, int(shouldProcess))
+        cookie = ":".join(existing_cookies + [new_cookie])
         expiration_seconds = time.time() + (60 * 60 * 24 * 365)
         expires = formatdate(expiration_seconds, usegmt=True)
-        self.request.RESPONSE.setCookie('dataprotection', cookie, path='/', expires=expires)
+        self.request.RESPONSE.setCookie(
+            "dataprotection", cookie, path="/", expires=expires
+        )
 
 
 class DatabaseStorage(BaseStorage):
-
     def __init__(self, processing_reason, site_root, request):
         privacy_tool = site_root.portal_privacy
-        reason_id = processing_reason.__name__.encode('ascii', 'ignore')
+        reason_id = processing_reason.__name__.encode("ascii", "ignore")
         if reason_id not in privacy_tool.objectIds():
-            privacy_tool._setObject(
-                reason_id,
-                ProcessingReason(id=reason_id),
-            )
+            privacy_tool._setObject(reason_id, ProcessingReason(id=reason_id))
         self.context = privacy_tool[reason_id]
         self.request = request
         self.processing_reason = processing_reason
@@ -118,7 +123,9 @@ class NoChoiceStorage(BaseStorage):
         self.request = request
         self.processing_reason = processing_reason
         if processing_reason.can_object:
-            raise ValueError("NoChoiceStorage is not suitable for lawful bases where objection is allowed")
+            raise ValueError(
+                "NoChoiceStorage is not suitable for lawful bases where objection is allowed"
+            )
 
     def consentToProcessing(self, identifier):
         return

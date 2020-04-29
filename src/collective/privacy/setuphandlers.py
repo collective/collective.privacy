@@ -5,12 +5,9 @@ from zope.interface import implementer
 
 @implementer(INonInstallable)
 class HiddenProfiles(object):
-
     def getNonInstallableProfiles(self):
         """Hide uninstall profile from site-creation and quickinstaller."""
-        return [
-            'collective.privacy:uninstall',
-        ]
+        return ["collective.privacy:uninstall"]
 
 
 def post_install(context):

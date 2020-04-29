@@ -11,49 +11,29 @@ class LegalBasis(object):
 
 
 consent = LegalBasis(
-    'consent',
-    can_object=True,
-    can_delete=True,
-    can_port=True,
-    default=False
+    "consent", can_object=True, can_delete=True, can_port=True, default=False
 )
 
 contract = LegalBasis(
-    'contract',
-    can_object=False,
-    can_delete=True,
-    can_port=True,
-    default=True
+    "contract", can_object=False, can_delete=True, can_port=True, default=True
 )
 
 legal_obligation = LegalBasis(
-    'legal_obligation',
-    can_object=False,
-    can_delete=False,
-    can_port=False,
-    default=True
+    "legal_obligation", can_object=False, can_delete=False, can_port=False, default=True
 )
 
 legitimate_interest = LegalBasis(
-    'legitimate_interest',
+    "legitimate_interest",
     can_object=True,
     can_delete=True,
     can_port=False,
-    default=True
+    default=True,
 )
 
 public_task = LegalBasis(
-    'public_task',
-    can_object=True,
-    can_delete=False,
-    can_port=False,
-    default=True
+    "public_task", can_object=True, can_delete=False, can_port=False, default=True
 )
 
 vital_interest = LegalBasis(
-    'vital_interest',
-    can_object=False,
-    can_delete=True,
-    can_port=False,
-    default=True
+    "vital_interest", can_object=False, can_delete=True, can_port=False, default=True
 )

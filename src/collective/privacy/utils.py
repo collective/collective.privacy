@@ -8,4 +8,4 @@ def match_string(expr, str):
     Ex: foo* matches foobar
     """
     expr = "^{}$".format(expr)
-    return bool(re.match(expr.replace('*', '.*'), str))
+    return bool(re.match(expr.replace("*", ".*"), str))

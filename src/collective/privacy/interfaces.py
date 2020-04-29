@@ -34,11 +34,14 @@ class ILawfulBasis(Interface):
     can_object = Attribute("The data subject can request no processing")
     can_delete = Attribute("The data subject can request deletion")
     can_port = Attribute("The data subject can move this data to a new provider")
-    default = Attribute("True if processing is allowed by default (consent), otherwise False")
+    default = Attribute(
+        "True if processing is allowed by default (consent), otherwise False"
+    )
 
 
 class IProcessingReason(Interface):
     """This represents a reason for processing data in a site"""
+
     __name__ = Attribute("An identifier for this category")
 
     identifier_factory = Attribute("Which method to use to identify a user")

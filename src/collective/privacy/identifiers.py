@@ -19,14 +19,14 @@ class CookieIdentifier(object):
 
 class EmailIdentifier(object):
     __name__ = "Email"
-    NAMESPACE = uuid.UUID('a838b36d-d1d5-477e-8471-c1e2079417cf')
+    NAMESPACE = uuid.UUID("a838b36d-d1d5-477e-8471-c1e2079417cf")
 
     @classmethod
     def getIdentifierForCurrentRequest(kls, request):
         """ It is not possible to get the user's email address from a request"""
         try:
-            if api.portal.get_registry_record('collective.privacy.trust_member_emails'):
-                email = api.user.get_current().getProperty('email')
+            if api.portal.get_registry_record("collective.privacy.trust_member_emails"):
+                email = api.user.get_current().getProperty("email")
             else:
                 email = None
             if not email:
@@ -44,7 +44,7 @@ class EmailIdentifier(object):
 
 class IPIdentifier(object):
     __name__ = "IP"
-    NAMESPACE = uuid.UUID('45865cac-1e4f-46d3-8e3e-1c277db76f3e')
+    NAMESPACE = uuid.UUID("45865cac-1e4f-46d3-8e3e-1c277db76f3e")
 
     @classmethod
     def get_ip(seklslf, request):
@@ -76,7 +76,7 @@ class IPIdentifier(object):
 
 class UserIdentifier(object):
     __name__ = "User"
-    NAMESPACE = uuid.UUID('9d01c079-a268-4e43-81f7-0eecd4c45316')
+    NAMESPACE = uuid.UUID("9d01c079-a268-4e43-81f7-0eecd4c45316")
 
     @classmethod
     def getIdentifierForCurrentRequest(kls, request):

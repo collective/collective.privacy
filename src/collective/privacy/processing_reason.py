@@ -7,14 +7,16 @@ from zope.i18n import translate
 
 
 class ProcessingReason(object):
-    def __init__(self,
-                 id,
-                 identifier_factory,
-                 optinoptout_storage,
-                 lawful_basis,
-                 title,
-                 description,
-                 cookies):
+    def __init__(
+        self,
+        id,
+        identifier_factory,
+        optinoptout_storage,
+        lawful_basis,
+        title,
+        description,
+        cookies,
+    ):
         self.__name__ = id
         self.identifier_factory = identifier_factory
         self.optinoptout_storage = optinoptout_storage
@@ -25,8 +27,7 @@ class ProcessingReason(object):
 
     def __repr__(self):
         return "<ProcessingReason {} using {}>".format(
-            self.__name__,
-            self.lawful_basis.__name__
+            self.__name__, self.lawful_basis.__name__
         )
 
     @property
@@ -38,7 +39,9 @@ class ProcessingReason(object):
             translated_text = translate(text, target_language=lang)
             description += u"<p>{0}<p>".format(translated_text)
         if not self.can_object:
-            text = _(u"In order to comply with Data Protection laws, we cannot offer the ability to opt out of this.")
+            text = _(
+                u"In order to comply with Data Protection laws, we cannot offer the ability to opt out of this."
+            )
             translated_text = translate(text, target_language=lang)
             description += u"<p><strong>{0}</strong><p>".format(translated_text)
         return description
@@ -128,16 +131,22 @@ class TrackingProcessingReason(ProcessingReason):
 
     def isOpinionExpressed(self, request, identifier=None):
         if identifier is None:
-            if request.headers.get('X-Do-Not-Track'):
+            if request.headers.get("X-Do-Not-Track"):
                 return True
-        return super(TrackingProcessingReason, self).isOpinionExpressed(request, identifier)
+        return super(TrackingProcessingReason, self).isOpinionExpressed(
+            request, identifier
+        )
 
     def isProcessingAllowed(self, request, identifier=None):
         if identifier is None:
-            if request.headers.get('X-Do-Not-Track'):
+            if request.headers.get("X-Do-Not-Track"):
                 return False
-        return super(TrackingProcessingReason, self).isOpinionExpressed(request, identifier)
+        return super(TrackingProcessingReason, self).isOpinionExpressed(
+            request, identifier
+        )
 
 
-class MarketingTrackingProcessingReason(MarketingProcessingReason, TrackingProcessingReason):
+class MarketingTrackingProcessingReason(
+    MarketingProcessingReason, TrackingProcessingReason
+):
     pass

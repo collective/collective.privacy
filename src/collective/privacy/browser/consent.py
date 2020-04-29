@@ -15,8 +15,8 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 consent_values = SimpleVocabulary(
     [
-        SimpleTerm(value=u'Allowed', title=_(u'Allowed')),
-        SimpleTerm(value=u'Blocked', title=_(u'Blocked')),
+        SimpleTerm(value=u"Allowed", title=_(u"Allowed")),
+        SimpleTerm(value=u"Blocked", title=_(u"Blocked")),
     ]
 )
 
@@ -28,6 +28,7 @@ class ConsentForm(form.SchemaForm):
     This form can be accessed as http://yoursite/@@consent
 
     """
+
     ignoreContext = True
 
     label = _(u"Privacy settings")
@@ -42,58 +43,74 @@ class ConsentForm(form.SchemaForm):
         reasons = self.context.portal_privacy.getAllReasons()
         validated_user = None
         self._action = self.url(name="consent")
-        if 'user_id' in self.request.form:
-            processing_reason = self.request.form.get('processing_reason')
-            user_id = self.request.form.get('user_id')
-            authentication = self.request.form.get('authentication')
+        if "user_id" in self.request.form:
+            processing_reason = self.request.form.get("processing_reason")
+            user_id = self.request.form.get("user_id")
+            authentication = self.request.form.get("authentication")
             if self.context.portal_privacy.verifyIdentifier(
-                authentication,
-                processing_reason,
-                user_id
+                authentication, processing_reason, user_id
             ):
-                reason_object = self.context.portal_privacy.getProcessingReason(processing_reason)
-                validated_user = (
-                    reason_object.identifier_factory.__name__,
-                    user_id
+                reason_object = self.context.portal_privacy.getProcessingReason(
+                    processing_reason
                 )
+                validated_user = (reason_object.identifier_factory.__name__, user_id)
                 self._action = self.url(
                     name="consent",
                     data={
-                        'processing_reason': processing_reason,
-                        'user_id': user_id,
-                        'authentication': authentication,
-                    }
+                        "processing_reason": processing_reason,
+                        "user_id": user_id,
+                        "authentication": authentication,
+                    },
                 )
 
         class IConsentForm(Interface):
             lang = api.portal.get_current_language()
             for reason_id, reason in sorted(reasons.items()):
-                reason_match = validated_user and validated_user[0] == reason.identifier_factory.__name__
+                reason_match = (
+                    validated_user
+                    and validated_user[0] == reason.identifier_factory.__name__
+                )
                 if reason_match:
-                    if reason.identifier_factory.getIdentifierForUser(validated_user[1]) is None:
+                    if (
+                        reason.identifier_factory.getIdentifierForUser(
+                            validated_user[1]
+                        )
+                        is None
+                    ):
                         continue
-                elif reason.identifier_factory.getIdentifierForCurrentRequest(self.request) is None:
+                elif (
+                    reason.identifier_factory.getIdentifierForCurrentRequest(
+                        self.request
+                    )
+                    is None
+                ):
                     continue
-                reason_id = reason_id.encode('ascii', 'replace')
+                reason_id = reason_id.encode("ascii", "replace")
                 form.widget(reason_id, RadioFieldWidget)
                 if not reason.can_object:
-                    form.mode(**{reason_id: 'display'})
+                    form.mode(**{reason_id: "display"})
                 translated_title = translate(_(reason.Title), target_language=lang)
                 locals()[reason_id] = schema.Choice(
                     title=translated_title,
                     description=reason.html_description,
                     vocabulary=consent_values,
                     required=True,
-                    default='Allowed' if reason.isProcessingAllowed(self.request, identifier=validated_user[1] if reason_match else None) else 'Blocked',
+                    default="Allowed"
+                    if reason.isProcessingAllowed(
+                        self.request,
+                        identifier=validated_user[1] if reason_match else None,
+                    )
+                    else "Blocked",
                 )
             del lang
             del translated_title
             del reason_id
             del reason_match
             del reason
+
         return IConsentForm
 
-    @button.buttonAndHandler(_(u'Ok'))
+    @button.buttonAndHandler(_(u"Ok"))
     def handleApply(self, action):
         data, errors = self.extractData()
         if errors:
@@ -102,7 +119,7 @@ class ConsentForm(form.SchemaForm):
 
         privacy_tool = self.context.portal_privacy
         for topic, answer in data.items():
-            answer = answer == 'Allowed'
+            answer = answer == "Allowed"
             if answer:
                 privacy_tool.consentToProcessing(topic)
             else:
@@ -117,10 +134,9 @@ class ConsentForm(form.SchemaForm):
 
 
 class ConsentBannerViewlet(base.ViewletBase):
-
     def getConsentRequired(self):
         found = []
-        if not api.portal.get_registry_record('collective.privacy.solicit_consent'):
+        if not api.portal.get_registry_record("collective.privacy.solicit_consent"):
             return found
         if IConsentFormView.providedBy(self.view):
             # Don't show consent banner on consent form
@@ -128,7 +144,7 @@ class ConsentBannerViewlet(base.ViewletBase):
         consent_reasons = [
             reason
             for reason in self.context.portal_privacy.getAllReasons().values()
-            if reason.lawful_basis.__name__ == 'consent'
+            if reason.lawful_basis.__name__ == "consent"
         ]
         for reason in consent_reasons:
             try:

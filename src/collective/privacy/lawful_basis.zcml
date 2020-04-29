@@ -32,7 +32,7 @@
     provides="collective.privacy.interfaces.ILawfulBasis"
     name="public_task"
     />
-  
+
   <utility
     component="collective.privacy.lawful_basis.vital_interest"
     provides="collective.privacy.interfaces.ILawfulBasis"

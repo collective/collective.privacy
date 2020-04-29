@@ -19,9 +19,7 @@ class IDataUseCategory(Interface):
     """
 
     name = TextLine(
-        title=_("Name"),
-        description=_("The id used for this category."),
-        required=False,
+        title=_("Name"), description=_("The id used for this category."), required=False
     )
 
     legal_basis = TextLine(
@@ -70,25 +68,58 @@ class IDataUseCategory(Interface):
 
     cookies = TextLine(
         title=_("Cookies names"),
-        description=_("List of cookies for this use : separeted by ',', wildcard (*) accepted"),
+        description=_(
+            "List of cookies for this use : separeted by ',', wildcard (*) accepted"
+        ),
         required=False,
     )
 
 
-def data_use_category(_context, name, title, description, legal_basis, storage, identifier, marketing=False, tracking=False, cookies=u""):
+def data_use_category(
+    _context,
+    name,
+    title,
+    description,
+    legal_basis,
+    storage,
+    identifier,
+    marketing=False,
+    tracking=False,
+    cookies=u"",
+):
     _context.action(
-        discriminator=('processing_reason', name),
+        discriminator=("processing_reason", name),
         callable=register_data_use_category,
-        args=(name, title, description, legal_basis, storage, identifier, marketing, tracking, cookies),
+        args=(
+            name,
+            title,
+            description,
+            legal_basis,
+            storage,
+            identifier,
+            marketing,
+            tracking,
+            cookies,
+        ),
     )
     return
 
 
-def register_data_use_category(name, title, description, legal_basis, storage, identifier, marketing=False, tracking=False, cookies=u""):
+def register_data_use_category(
+    name,
+    title,
+    description,
+    legal_basis,
+    storage,
+    identifier,
+    marketing=False,
+    tracking=False,
+    cookies=u"",
+):
     manager = getSiteManager()
     legal_basis_obj = manager.queryUtility(ILawfulBasis, name=legal_basis)
     if legal_basis_obj is None:
-        raise ValueError('{} is not a valid lawful basis.'.format(legal_basis))
+        raise ValueError("{} is not a valid lawful basis.".format(legal_basis))
 
     if marketing and tracking:
         kls = MarketingTrackingProcessingReason
