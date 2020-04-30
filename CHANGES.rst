@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0a2 (unreleased)
+1.0b1 (2020-04-30)
 ------------------
 
 - Avoid caching for consent banner
