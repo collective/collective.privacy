@@ -1,4 +1,7 @@
 graft src/collective
 graft docs
 include *.rst
+include LICENSE.GPL
 global-exclude *.pyc
+exclude .gitlab-ci.yml
+exclude requirements.txt
