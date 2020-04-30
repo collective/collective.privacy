@@ -5,7 +5,6 @@
 .. image:: https://travis-ci.com/collective/collective.privacy.svg?branch=master
     :target: https://travis-ci.com/collective/collective.privacy
 
-==================
 collective.privacy
 ==================
 
@@ -62,7 +61,7 @@ default the permission is denied until an end user gives permission.
 Note that the i18n domain of your configuration must be `collective.privacy` if you want to translate titles
 and descriptions of your new data processing reasons. 
 
-You can then guard your uses of the data, for example:
+You can then guard your uses of the data, for example::
 
     <div tal:condition="python: context.portal_privacy.processingIsAllowed('show_example_media_embed')">
         ...
@@ -165,7 +164,7 @@ The identifier is a UUID derived from the user name using a one-way function, no
 Storages
 --------
 
-The storage determines how the user's preferences are persisted. There are three storages available::
+The storage determines how the user's preferences are persisted. There are three storages available:
 
 collective.privacy.storage.CookieStorage
 ****************************************
