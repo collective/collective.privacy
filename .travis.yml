@@ -5,19 +5,22 @@ cache:
   directories:
   - eggs
   - downloads
-python:
-  - "2.7"
+jobs:
+  include:
+    - python: 2.7
+      env: PLONE_VERSION=4.3.x
+    - python: 2.7
+      env: PLONE_VERSION=5.1.x
+    - python: 2.7
+      env: PLONE_VERSION=5.2.x
+    - python: 3.7
+      env: PLONE_VERSION=5.2.x
 matrix:
   fast_finish: true
-env:
-  matrix:
-    - PLONE_VERSION=4.3.x
-    - PLONE_VERSION=5.0.x
-    - PLONE_VERSION=5.1.x
 before_install:
   - sudo apt-get install -qqy firefox-geckodriver
 install:
-  - virtualenv -p `which python` .
+  - virtualenv .
   - bin/pip install -r requirements.txt
   - sed -ie "s#plone-x.x.x.cfg#plone-$PLONE_VERSION.cfg#" travis.cfg
   - bin/buildout -t 10 -c travis.cfg
