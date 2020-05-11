@@ -4,6 +4,7 @@ from collective.privacy.testing import COLLECTIVE_PRIVACY_INTEGRATION_TESTING
 from zope.globalrequest import getRequest
 
 import unittest
+import re
 
 COOKIES = {"foo1": "foo value", "foo2": "foo value 2", "bar": "bar value"}
 
@@ -23,6 +24,7 @@ class TestCookies(unittest.TestCase):
             reason
             for reason in self.portal.portal_privacy.getAllReasons().values()
             if reason.lawful_basis.__name__ == "consent"
+            and reason.__name__ == "show_media_embed"
         ][0]
         request = getRequest()
         request.cookies = COOKIES
@@ -33,4 +35,8 @@ class TestCookies(unittest.TestCase):
             data = cookies.get(cookie_name)
             self.assertEqual(data["value"], "deleted")
             self.assertEqual(data["max_age"], 0)
-            self.assertEqual(data["expires"], "Wed, 31-Dec-97 23:59:59 GMT")
+            # Depending of the version of Plone and Zope, the result differ
+            # Wed, 31 Dec 1997 23:59:59 GMT on Plone 5.2
+            # Wed, 31-Dec-97 23:59:59 GMT before
+            expire_regexp = "Wed, 31( |-)Dec( |-)(1997|97) 23:59:59 GMT"
+            self.assertIsNotNone(re.match(expire_regexp, data["expires"]))
