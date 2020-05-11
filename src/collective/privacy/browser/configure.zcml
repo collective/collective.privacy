@@ -12,9 +12,8 @@
     />
 
   <!-- Publish static files -->
-  <plone:static
+  <browser:resourceDirectory
     name="collective.privacy"
-    type="plone"
     directory="static"
     />
 
