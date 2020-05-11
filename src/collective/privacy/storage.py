@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
 from collective.privacy.tool import ProcessingReason
-from email.Utils import formatdate
 
+import pkg_resources
 import time
+
+try:
+    pkg_resources.get_distribution("email.Utils")
+except pkg_resources.DistributionNotFound:
+    from email.utils import formatdate
+else:
+    from email.Utils import formatdate
 
 
 class BaseStorage(object):
@@ -70,7 +77,7 @@ class CookieStorage(BaseStorage):
             lambda cookie: "{}|".format(topic) not in cookie, existing_cookies
         )
         new_cookie = "{}|{:d}".format(topic, int(shouldProcess))
-        cookie = ":".join(existing_cookies + [new_cookie])
+        cookie = ":".join(list(existing_cookies) + [new_cookie])
         expiration_seconds = time.time() + (60 * 60 * 24 * 365)
         expires = formatdate(expiration_seconds, usegmt=True)
         self.request.RESPONSE.setCookie(

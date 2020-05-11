@@ -4,8 +4,8 @@ from collective.privacy import _
 from collective.privacy.interfaces import IConsentFormView
 from plone import api
 from plone.app.layout.viewlets import common as base
-from plone.directives import form
 from z3c.form import button
+from z3c.form.form import Form
 from z3c.form.browser.radio import RadioFieldWidget
 from zope import schema
 from zope.i18n import translate
@@ -13,8 +13,34 @@ from zope.interface import Interface
 from zope.interface import implementer
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+from zope.component import getMultiAdapter
+from zope.traversing.browser.absoluteurl import _safe as SAFE_URL_CHARACTERS
+from zope.traversing.browser.interfaces import IAbsoluteURL
+from six import text_type
+from six.moves import urllib
 
 import json
+import pkg_resources
+
+
+try:
+    pkg_resources.get_distribution("plone.directives.form")
+except pkg_resources.DistributionNotFound:
+    HAS_DIRECTIVES = False
+    from plone.autoform import directives
+    from plone.autoform.form import AutoExtensibleForm
+else:
+    HAS_DIRECTIVES = True
+    from plone.directives import form as directives
+    from plone.directives.form import SchemaForm as AutoExtensibleForm
+
+
+try:
+    from Products.CMFPlone.utils import safe_text
+except ImportError:
+    def safe_text(text):
+        return str(text)
+
 
 consent_values = SimpleVocabulary(
     [
@@ -25,7 +51,7 @@ consent_values = SimpleVocabulary(
 
 
 @implementer(IConsentFormView)
-class ConsentForm(form.SchemaForm):
+class ConsentForm(AutoExtensibleForm, Form):
     """ Define Form handling
 
     This form can be accessed as http://yoursite/@@consent
@@ -40,6 +66,35 @@ class ConsentForm(form.SchemaForm):
     @property
     def action(self):
         return self._action
+
+    def url(self, name=None, data=None):
+        """ Partially reimplement url method that came from plone.directives.form
+        Return string for the URL based on the obj and name. The data
+        argument is used to form a CGI query string.
+        """
+        obj = self.context
+
+        if data is None:
+            data = {}
+        else:
+            if not isinstance(data, dict):
+                raise TypeError('url() data argument must be a dict.')
+
+        url = getMultiAdapter((obj, self.request), IAbsoluteURL)()
+        if name is not None:
+            url += '/' + urllib.parse.quote(name.encode('utf-8'), SAFE_URL_CHARACTERS)
+        if not data:
+            return url
+
+        for k, v in data.items():
+            if isinstance(v, text_type):
+                data[k] = v.encode('utf-8')
+            if isinstance(v, (list, set, tuple)):
+                data[k] = [
+                    isinstance(item, text_type) and item.encode('utf-8')
+                    or item for item in v]
+
+        return url + '?' + urllib.parse.urlencode(data, doseq=True)
 
     @property
     def schema(self):
@@ -89,11 +144,11 @@ class ConsentForm(form.SchemaForm):
                 ):
                     continue
                 reason_id = reason_id.encode("ascii", "replace")
-                form.widget(reason_id, RadioFieldWidget)
+                directives.widget(safe_text(reason_id), RadioFieldWidget)
                 if not reason.can_object:
-                    form.mode(**{reason_id: "display"})
+                    directives.mode(**{safe_text(reason_id): "display"})
                 translated_title = translate(_(reason.Title), target_language=lang)
-                locals()[reason_id] = schema.Choice(
+                locals()[safe_text(reason_id)] = schema.Choice(
                     title=translated_title,
                     description=reason.html_description,
                     vocabulary=consent_values,
