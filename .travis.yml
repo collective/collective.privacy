@@ -18,8 +18,6 @@ jobs:
       env: PLONE_VERSION=5.2.x
     - python: 3.6
       env: PLONE_VERSION=5.2.x
-    - python: 3.7
-      env: PLONE_VERSION=5.2.x
 before_install:
   - sudo apt-get install -qqy firefox-geckodriver
 install:
