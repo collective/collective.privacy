@@ -1,3 +1,4 @@
+os: linux
 language: python
 sudo: false
 cache:
@@ -15,8 +16,6 @@ jobs:
       env: PLONE_VERSION=5.2.x
     - python: 3.7
       env: PLONE_VERSION=5.2.x
-matrix:
-  fast_finish: true
 before_install:
   - sudo apt-get install -qqy firefox-geckodriver
 install:
