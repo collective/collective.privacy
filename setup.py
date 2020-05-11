@@ -46,7 +46,6 @@ setup(
         "Products.GenericSetup>=1.8.2",
         "setuptools",
         "z3c.jbot",
-        "plone.directives.form",
     ],
     extras_require={
         "test": [
@@ -56,6 +55,9 @@ setup(
             # plone_coredev tests as of 2016-04-01.
             "plone.testing>=5.0.0",
             "plone.app.robotframework[debug]",
+        ],
+        "plone4": [
+            "plone.directives.form",
         ]
     },
     entry_points="""
