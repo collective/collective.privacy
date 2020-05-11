@@ -4,7 +4,8 @@ Changelog
 1.0b2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add Python 3 and Plone 5.2 compatbility
+  [mpeeters]
 
 
 1.0b1 (2020-04-30)
