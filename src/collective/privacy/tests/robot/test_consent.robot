@@ -82,5 +82,4 @@ The consent banner is not visible on that page
 The consent banner is never visible
   Element Should not be visible  css=#gdpr-consent-banner
   Go To  ${PLONE_URL}
-  Sleep  3s  Wait for javascript
-  Element Should not be visible  css=#gdpr-consent-banner
+  Wait Until Element Is Not Visible  css=#gdpr-consent-banner
