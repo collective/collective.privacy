@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from Products.Five import BrowserView
 from collective.privacy import _
+from collective.privacy.utils import safe_fieldname
 from collective.privacy.interfaces import IConsentFormView
 from plone import api
 from plone.app.layout.viewlets import common as base
@@ -33,13 +34,6 @@ else:
     HAS_DIRECTIVES = True
     from plone.directives import form as directives
     from plone.directives.form import SchemaForm as AutoExtensibleForm
-
-
-try:
-    from Products.CMFPlone.utils import safe_text
-except ImportError:
-    def safe_text(text):
-        return str(text)
 
 
 consent_values = SimpleVocabulary(
@@ -144,11 +138,11 @@ class ConsentForm(AutoExtensibleForm, Form):
                 ):
                     continue
                 reason_id = reason_id.encode("ascii", "replace")
-                directives.widget(safe_text(reason_id), RadioFieldWidget)
+                directives.widget(safe_fieldname(reason_id), RadioFieldWidget)
                 if not reason.can_object:
-                    directives.mode(**{safe_text(reason_id): "display"})
+                    directives.mode(**{safe_fieldname(reason_id): "display"})
                 translated_title = translate(_(reason.Title), target_language=lang)
-                locals()[safe_text(reason_id)] = schema.Choice(
+                locals()[safe_fieldname(reason_id)] = schema.Choice(
                     title=translated_title,
                     description=reason.html_description,
                     vocabulary=consent_values,
