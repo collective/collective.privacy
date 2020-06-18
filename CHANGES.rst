@@ -5,7 +5,7 @@ Changelog
 --------------------
 
 - Ensure that consent banner shows on top (z-index) of everything else (eg: Google Maps)
-  [llasudry]
+  [laulaz]
 
 
 1.1.0a1 (2020-05-12)
@@ -22,19 +22,19 @@ Changelog
   [mpeeters]
 
 - Don't show consent banner on consent form
-  [llasudry]
+  [laulaz]
 
 - Allow to delete specified cookies if user objects to their use
-  [llasudry]
+  [laulaz]
 
 - Add Dutch translation
-  [llasudry]
+  [laulaz]
 
 - Add link to manage privacy settings
-  [llasudry]
+  [laulaz]
 
 - Translate all messages / data processing reasons
-  [llasudry]
+  [laulaz]
 
 - Fix consent submission
   [mpeeters]
@@ -43,7 +43,7 @@ Changelog
   [mpeeters]
 
 - Add French translations
-  [llasudry]
+  [laulaz]
 
 - Add code to give better warnings around cookie use
   [MatthewWilkes]
