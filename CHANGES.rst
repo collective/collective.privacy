@@ -4,7 +4,8 @@ Changelog
 1.1.0a2 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Ensure that consent banner shows on top (z-index) of everything else (eg: Google Maps)
+  [llasudry]
 
 
 1.1.0a1 (2020-05-12)

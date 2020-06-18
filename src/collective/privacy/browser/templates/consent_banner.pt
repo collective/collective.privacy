@@ -3,6 +3,7 @@
                  needed view/is_consent_required;
                  portal_url portal_state/portal_url;"
      tal:condition="needed" style="
+    z-index: 999999;
     width: 100%;
     position: fixed;
     bottom: 0;
