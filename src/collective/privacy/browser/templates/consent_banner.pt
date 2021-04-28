@@ -14,7 +14,7 @@
     <form method="POST"
           style="max-width: 800px; margin: auto;"
           tal:attributes="action string:${portal_url}/portal_privacy/bannerConsent;
-                          data-json-url string:${portal_url}/@@consent-json">
+                          data-json-url string:${context/absolute_url}/@@consent-json">
         <div style="float: left; max-width: 60%;" class="gdpr-reason"></div>
         <div style="float: right; padding-top: 5px;" class="gdpr-actions">
             <input style="padding: 5px; margin-right: 10px;" type="submit" name="consent" value="Allow" i18n:attributes="value"/>

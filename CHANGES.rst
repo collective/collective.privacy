@@ -4,6 +4,10 @@ Changelog
 1.1.0a2 (unreleased)
 --------------------
 
+- Fix JSON call for banner consent to get correct language in some multilingual
+  configurations, if the current language must be taken from context (#14)
+  [laulaz]
+
 - Ensure that consent banner shows on top (z-index) of everything else (eg: Google Maps)
   [laulaz]
 
