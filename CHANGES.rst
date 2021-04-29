@@ -4,6 +4,10 @@ Changelog
 1.1.0a2 (unreleased)
 --------------------
 
+- Handle multilingual & subsites configurations by rendering consent form on
+  navigation root (#15)
+  [laulaz]
+
 - Fix JSON call for banner consent to get correct language in some multilingual
   configurations, if the current language must be taken from context (#14)
   [laulaz]

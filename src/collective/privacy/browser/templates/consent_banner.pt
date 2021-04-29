@@ -1,7 +1,8 @@
 <div id="gdpr-consent-banner" i18n:domain="collective.privacy"
      tal:define="portal_state context/@@plone_portal_state;
                  needed view/is_consent_required;
-                 portal_url portal_state/portal_url;"
+                 portal_url portal_state/portal_url;
+                 navigation_root_url portal_state/navigation_root_url;"
      tal:condition="needed" style="
     z-index: 999999;
     width: 100%;
@@ -23,7 +24,7 @@
     </form>
     <div style="clear: both; text-align: center;">
         <a href=""
-           tal:attributes="href string:${portal_url}/@@consent"
+           tal:attributes="href string:${navigation_root_url}/@@consent"
            i18n:translate="">Manage privacy settings</a>
     </div>
     <script type="text/javascript"

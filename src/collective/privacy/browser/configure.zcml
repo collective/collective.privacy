@@ -18,7 +18,7 @@
     />
 
   <browser:page
-    for="Products.CMFCore.interfaces.ISiteRoot"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
     name="consent"
     permission="zope2.View"
     class=".consent.ConsentForm"
