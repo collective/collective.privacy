@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.0a2 (unreleased)
+1.1.0a2 (2021-07-06)
 --------------------
 
 - Fix consent banner miss (when there are multiple cookies to accept) by
