@@ -23,7 +23,7 @@ jQuery(function($) {
         '<p>' + reason.Description + '</p>' +
         '<input type="hidden" name="processing_reason" value="' + reason.name + '" />'
       );
-      $('#gdpr-consent-banner form .gdpr-actions input').on('click', submitConsentForm);
+      $('#gdpr-consent-banner form .gdpr-actions input').one('click', submitConsentForm);
     } else {
       $('#gdpr-consent-banner').remove();
     }

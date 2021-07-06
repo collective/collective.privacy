@@ -4,6 +4,10 @@ Changelog
 1.1.0a2 (unreleased)
 --------------------
 
+- Fix consent banner miss (when there are multiple cookies to accept) by
+  ensuring JS event is only registered once on consent banner button.
+  [laulaz]
+
 - Handle multilingual & subsites configurations by rendering consent form on
   navigation root (#15)
   [laulaz]
