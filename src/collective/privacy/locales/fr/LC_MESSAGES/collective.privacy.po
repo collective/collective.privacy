@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.privacy\n"
-"POT-Creation-Date: 2020-02-07 11:26+0000\n"
+"POT-Creation-Date: 2021-07-27 09:08+0000\n"
 "PO-Revision-Date: 2016-01-04 08:14+0000\n"
 "Last-Translator: Laurent Lasudry <laurent.lasudry@affinitic.be>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Is-Fallback-For: fr-be fr-ca fr-lu fr-mc fr-ch fr-fr\n"
 "Language: fr\n"
 
-#: ../browser/templates/consent_banner.pt:18
+#: ../browser/templates/consent_banner.pt:21
 msgid "Allow"
 msgstr "Autoriser"
 
@@ -28,15 +28,15 @@ msgstr "Permet aux utilisateurs connectés de modifier les paramètres de confid
 msgid "Allow other users to send content links"
 msgstr "Permet à d'autres utilisateurs d'envoyer des liens de contenu"
 
-#: ../browser/consent.py:16
+#: ../browser/consent.py:41
 msgid "Allowed"
 msgstr "Autorisé"
 
-#: ../zcml.py:35
+#: ../zcml.py:33
 msgid "An object that provides IIdentifierFactory"
 msgstr "Un objet qui fournit IIdentifierFactory"
 
-#: ../zcml.py:41
+#: ../zcml.py:39
 msgid "An object that provides IOptInOptOutStorage"
 msgstr "Un objet qui fournit IOptInOptOutStorage"
 
@@ -44,19 +44,19 @@ msgstr "Un objet qui fournit IOptInOptOutStorage"
 msgid "Analytics that are used to improve the website without                  directly tracking users"
 msgstr "Statistiques qui sont utilisées pour améliorer le site sans directement suivre les utilisateurs"
 
-#: ../browser/consent.py:17
+#: ../browser/consent.py:42
 msgid "Blocked"
 msgstr "Bloqué"
 
-#: ../browser/consent.py:111
+#: ../browser/consent.py:182
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../browser/consent.py:32
+#: ../browser/consent.py:58
 msgid "Choose to opt in or out of various pieces of functionality"
 msgstr "Choisissez si vous consentez ou non à certaines fonctionnalités"
 
-#: ../zcml.py:72
+#: ../zcml.py:70
 msgid "Cookies names"
 msgstr "Nom des cookies"
 
@@ -64,7 +64,7 @@ msgstr "Nom des cookies"
 msgid "Cookies to record your privacy preferences"
 msgstr "Cookies pour enregistrer vos préférences de confidentialité"
 
-#: ../zcml.py:52
+#: ../zcml.py:50
 msgid "Description"
 msgstr "Description"
 
@@ -76,11 +76,11 @@ msgstr "Affiche un bandeau demandant le consentement pour tous les éléments qu
 msgid "Display consent banner"
 msgstr "Affiche le bandeau de consentement"
 
-#: ../zcml.py:34
+#: ../zcml.py:32
 msgid "How users will be identified"
 msgstr "Comment les utilisateurs seront identifiés"
 
-#: ../processing_reason.py:41
+#: ../processing_reason.py:42
 msgid "In order to comply with Data Protection laws, we cannot offer the ability to opt out of this."
 msgstr "Afin de nous conformer aux lois de protection des données personnelles, nous ne pouvons pas vous permettre de refuser ceci."
 
@@ -88,27 +88,27 @@ msgstr "Afin de nous conformer aux lois de protection des données personnelles,
 msgid "Installs the collective.privacy add-on."
 msgstr "Installe le module collective.privacy."
 
-#: ../zcml.py:59
+#: ../zcml.py:57
 msgid "Is this used for marketing purposes?"
 msgstr "Est-ce utilisé à des fins commerciales ?"
 
-#: ../zcml.py:66
+#: ../zcml.py:64
 msgid "Is this used for tracking purposes?"
 msgstr "Est-ce utilisé à des fins de suivi ?"
 
-#: ../zcml.py:28
+#: ../zcml.py:26
 msgid "Legal basis"
 msgstr "Base légale"
 
-#: ../zcml.py:73
+#: ../zcml.py:71
 msgid "List of cookies for this use : separeted by ',', wildcard (*) accepted"
 msgstr "Liste des cookies pour cet usage : séparés par des ',', caractère générique (*) accepté"
 
-#: ../browser/templates/consent_banner.pt:28
+#: ../browser/templates/consent_banner.pt:26
 msgid "Manage privacy settings"
 msgstr "Gérer mes paramètres de confidentialité"
 
-#: ../zcml.py:58
+#: ../zcml.py:56
 msgid "Marketing"
 msgstr "Commercialisation"
 
@@ -116,7 +116,7 @@ msgstr "Commercialisation"
 msgid "Name"
 msgstr "Nom"
 
-#: ../browser/consent.py:94
+#: ../browser/consent.py:165
 msgid "Ok"
 msgstr "Ok"
 
@@ -136,35 +136,35 @@ msgstr "Veuillez entrer une adresse courriel valide."
 msgid "Please submit an email address."
 msgstr "Veuillez entrer une adresse courriel."
 
-#: ../browser/consent.py:31
+#: ../browser/consent.py:57
 msgid "Privacy settings"
 msgstr "Paramètres de confidentialité"
 
-#: ../browser/templates/consent_banner.pt:19
+#: ../browser/templates/consent_banner.pt:22
 msgid "Refuse"
 msgstr "Refuser"
 
-#: ../zcml.py:40
+#: ../zcml.py:38
 msgid "Storage for this data"
 msgstr "Stockage pour cette donnée"
 
-#: ../zcml.py:53
+#: ../zcml.py:51
 msgid "The end-user visible description of this processing"
 msgstr "La description visible par l'utilisateur final pour ce traitement"
 
-#: ../zcml.py:47
+#: ../zcml.py:45
 msgid "The end-user visible title for this processing"
 msgstr "Le titre visible par l'utilisateur final pour ce traitement"
 
-#: ../zcml.py:23
+#: ../zcml.py:22
 msgid "The id used for this category."
 msgstr "L'identifiant utilisé pour cette catégorie."
 
-#: ../zcml.py:29
+#: ../zcml.py:27
 msgid "The identifier of a legal basis that is used here"
 msgstr "L'identifiant de la base légale utilisée"
 
-#: ../processing_reason.py:37
+#: ../processing_reason.py:38
 msgid "The preference you set here will be stored on your computer."
 msgstr "La préférence choisie sera stockée sur votre ordinateur."
 
@@ -176,11 +176,11 @@ msgstr "Ils stockent si vous avez consenti ou si vous vous êtes opposés aux di
 msgid "This person does not want to receive our emails"
 msgstr "Cette personne ne souhaite pas recevoir nos courriels"
 
-#: ../zcml.py:46
+#: ../zcml.py:44
 msgid "Title"
 msgstr "Titre"
 
-#: ../zcml.py:65
+#: ../zcml.py:63
 msgid "Tracking"
 msgstr "Suivi"
 
@@ -196,7 +196,7 @@ msgstr "Désinstalle le module collective.privacy."
 msgid "Unintrusive analytics"
 msgstr "Statistiques non intrusives"
 
-#: ../browser/consent.py:109
+#: ../browser/consent.py:180
 msgid "Your preferences have been saved."
 msgstr "Vos préférences ont été enregistrées."
 
@@ -206,4 +206,10 @@ msgstr ""
 
 #: ../configure.zcml:49
 msgid "collective.privacy (uninstall)"
+msgstr ""
+
+#. Default: "If you would prefer not to receive these emails you can adjust your privacy settings on ${portal_title} by visiting ${consent_url}"
+#: ../browser/overrides/Products.CMFPlone.browser.templates.sendto_template.pt:34
+#: ../browser/overrides/Products.CMFPlone.skins.plone_templates.sendto_template.pt:34
+msgid "email_privacy_info"
 msgstr ""
