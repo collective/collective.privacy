@@ -4,6 +4,10 @@ Changelog
 1.1.0a2 (unreleased)
 --------------------
 
+- Fix traceback on send_to_form when sending an email : getConsentLink method
+  must be accessible from template
+  [laulaz]
+
 - Fix consent banner miss (when there are multiple cookies to accept) by
   ensuring JS event is only registered once on consent banner button.
   [laulaz]

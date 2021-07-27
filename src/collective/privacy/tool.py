@@ -73,7 +73,7 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
             signed, self.signIdentifier(processing_reason_id, user)
         )
 
-    @security.private
+    @security.public
     def getConsentLink(self, processing_reason_id, user=None):
         site = self.portal_url.getPortalObject()
         return "{}/@@consent?processing_reason={}&user_id={}&authentication={}".format(
