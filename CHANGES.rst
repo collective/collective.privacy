@@ -4,6 +4,9 @@ Changelog
 1.1.0a2 (unreleased)
 --------------------
 
+- Fix translation domain for custom text in send_to_form email
+  [laulaz]
+
 - Fix traceback on send_to_form when sending an email : getConsentLink method
   must be accessible from template
   [laulaz]
