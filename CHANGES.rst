@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.1.0a2 (unreleased)
---------------------
+1.1.0a2-cirb (2021-07-27)
+-------------------------
 
 - Fix translation domain & add translations for custom text in send_to_form email
   [laulaz]
