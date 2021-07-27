@@ -212,4 +212,4 @@ msgstr ""
 #: ../browser/overrides/Products.CMFPlone.browser.templates.sendto_template.pt:34
 #: ../browser/overrides/Products.CMFPlone.skins.plone_templates.sendto_template.pt:34
 msgid "email_privacy_info"
-msgstr ""
+msgstr "Si vous ne souhaitez pas recevoir ces emails, vous pouvez adapter vos paramètres de confidentialité pour ${portal_title} en visitant ${consent_url}"

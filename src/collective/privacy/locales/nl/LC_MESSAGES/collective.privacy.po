@@ -211,4 +211,4 @@ msgstr ""
 #: ../browser/overrides/Products.CMFPlone.browser.templates.sendto_template.pt:34
 #: ../browser/overrides/Products.CMFPlone.skins.plone_templates.sendto_template.pt:34
 msgid "email_privacy_info"
-msgstr ""
+msgstr "Als u deze e-mails liever niet wilt ontvangen, kunt u uw privacyinstellingen aanpassen op ${portal_title} door ${consent_url}"
