@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.privacy\n"
-"POT-Creation-Date: 2020-01-24 14:23+0000\n"
+"POT-Creation-Date: 2021-07-27 09:08+0000\n"
 "PO-Revision-Date: 2020-02-12 14:00+0000\n"
 "Last-Translator: Laurent Lasudry <laurent.lasudry@affinitic.be>\n"
 "Language-Team: \n"
@@ -15,7 +15,7 @@ msgstr ""
 "Domain: collective.privacy\n"
 "Language: nl\n"
 
-#: ../browser/templates/consent_banner.pt:18
+#: ../browser/templates/consent_banner.pt:21
 msgid "Allow"
 msgstr "Toestaan"
 
@@ -27,39 +27,43 @@ msgstr "Aangemelde gebruikers toestaan om de privacyinstellingen die aan het e-m
 msgid "Allow other users to send content links"
 msgstr "Andere gebruikers toestaan om inhoudelijke links te sturen"
 
-#: ../browser/consent.py:16
+#: ../browser/consent.py:41
 msgid "Allowed"
 msgstr "Toegestaan"
 
-#: ../zcml.py:35
+#: ../zcml.py:33
 msgid "An object that provides IIdentifierFactory"
 msgstr "Een object dat IIdentifierFactory aanbiedt"
 
-#: ../zcml.py:41
+#: ../zcml.py:39
 msgid "An object that provides IOptInOptOutStorage"
 msgstr "Een object dat IOptInOptOutStorage aanbiedt"
 
-#: ../plone_core/configure.zcml:27
+#: ../plone_core/configure.zcml:28
 msgid "Analytics that are used to improve the website without                  directly tracking users"
 msgstr "Analytics die worden gebruikt om de website te verbeteren zonder de gebruikers rechtstreeks te traceren"
 
-#: ../browser/consent.py:17
+#: ../browser/consent.py:42
 msgid "Blocked"
 msgstr "Geblokkeerd"
 
-#: ../browser/consent.py:111
+#: ../browser/consent.py:182
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../browser/consent.py:32
+#: ../browser/consent.py:58
 msgid "Choose to opt in or out of various pieces of functionality"
 msgstr "Kies voor opt-in of opt-out voor verschillende functionaliteiten"
+
+#: ../zcml.py:70
+msgid "Cookies names"
+msgstr ""
 
 #: ../configure.zcml:30
 msgid "Cookies to record your privacy preferences"
 msgstr "Cookies om uw privacyvoorkeuren te bewaren"
 
-#: ../zcml.py:52
+#: ../zcml.py:50
 msgid "Description"
 msgstr "Beschrijving"
 
@@ -71,11 +75,11 @@ msgstr "Een banner weergeven waarin om toestemming wordt gevraagd voor alle item
 msgid "Display consent banner"
 msgstr "Toestemmingsbanner weergeven"
 
-#: ../zcml.py:34
+#: ../zcml.py:32
 msgid "How users will be identified"
 msgstr "Hoe gebruikers worden geidentificeerd"
 
-#: ../processing_reason.py:38
+#: ../processing_reason.py:42
 msgid "In order to comply with Data Protection laws, we cannot offer the ability to opt out of this."
 msgstr "Om te voldoen aan de wet op de gegevensbescherming, kunnen we hiervoor niet de mogelijkheid van opt-out bieden."
 
@@ -83,23 +87,27 @@ msgstr "Om te voldoen aan de wet op de gegevensbescherming, kunnen we hiervoor n
 msgid "Installs the collective.privacy add-on."
 msgstr ""
 
-#: ../zcml.py:59
+#: ../zcml.py:57
 msgid "Is this used for marketing purposes?"
 msgstr "Wordt dit gebruikt voor marketingdoeleinden?"
 
-#: ../zcml.py:66
+#: ../zcml.py:64
 msgid "Is this used for tracking purposes?"
 msgstr "Wordt dit gebruikt voor traceringsdoeleinden?"
 
-#: ../zcml.py:28
+#: ../zcml.py:26
 msgid "Legal basis"
 msgstr "Wettelijke grondslag"
 
-#: ../browser/templates/consent_banner.pt:28
+#: ../zcml.py:71
+msgid "List of cookies for this use : separeted by ',', wildcard (*) accepted"
+msgstr ""
+
+#: ../browser/templates/consent_banner.pt:26
 msgid "Manage privacy settings"
 msgstr "Privacyinstellingen beheren"
 
-#: ../zcml.py:58
+#: ../zcml.py:56
 msgid "Marketing"
 msgstr "Marketing"
 
@@ -107,7 +115,7 @@ msgstr "Marketing"
 msgid "Name"
 msgstr "Naam"
 
-#: ../browser/consent.py:94
+#: ../browser/consent.py:165
 msgid "Ok"
 msgstr "Ok"
 
@@ -127,35 +135,35 @@ msgstr "Geef een geldig e-mailadres op."
 msgid "Please submit an email address."
 msgstr "Geef een e-mailadres op."
 
-#: ../browser/consent.py:31
+#: ../browser/consent.py:57
 msgid "Privacy settings"
 msgstr "Privacyinstellingen"
 
-#: ../browser/templates/consent_banner.pt:19
+#: ../browser/templates/consent_banner.pt:22
 msgid "Refuse"
 msgstr "Weigeren"
 
-#: ../zcml.py:40
+#: ../zcml.py:38
 msgid "Storage for this data"
 msgstr "Opslag voor deze gegevens"
 
-#: ../zcml.py:53
+#: ../zcml.py:51
 msgid "The end-user visible description of this processing"
 msgstr "De beschrijving van deze verwerking zichtbaar voor eindgebruiker"
 
-#: ../zcml.py:47
+#: ../zcml.py:45
 msgid "The end-user visible title for this processing"
 msgstr "De titel van deze verwerking zichtbaar voor eindgebruiker"
 
-#: ../zcml.py:23
+#: ../zcml.py:22
 msgid "The id used for this category."
 msgstr "Het id dat voor deze categorie wordt gebruikt."
 
-#: ../zcml.py:29
+#: ../zcml.py:27
 msgid "The identifier of a legal basis that is used here"
 msgstr "De identificatiecode van een wettelijke grondslag die hier wordt gebruikt"
 
-#: ../processing_reason.py:34
+#: ../processing_reason.py:38
 msgid "The preference you set here will be stored on your computer."
 msgstr "De voorkeur die u hier instelt, wordt op uw computer opgeslagen."
 
@@ -167,11 +175,11 @@ msgstr "Deze worden opgeslagen als u toestemming hebt gegeven of bezwaar hebt ge
 msgid "This person does not want to receive our emails"
 msgstr "Deze persoon wil onze e-mails niet ontvangen"
 
-#: ../zcml.py:46
+#: ../zcml.py:44
 msgid "Title"
 msgstr "Titel"
 
-#: ../zcml.py:65
+#: ../zcml.py:63
 msgid "Tracking"
 msgstr "Tracking"
 
@@ -183,11 +191,11 @@ msgstr "e-mails van leden vertrouwen"
 msgid "Uninstalls the collective.privacy add-on."
 msgstr ""
 
-#: ../plone_core/configure.zcml:27
+#: ../plone_core/configure.zcml:28
 msgid "Unintrusive analytics"
 msgstr "Niet-intrusieve analytics"
 
-#: ../browser/consent.py:109
+#: ../browser/consent.py:180
 msgid "Your preferences have been saved."
 msgstr "Uw voorkeuren werden opgeslagen."
 
@@ -198,3 +206,9 @@ msgstr ""
 #: ../configure.zcml:49
 msgid "collective.privacy (uninstall)"
 msgstr ""
+
+#. Default: "If you would prefer not to receive these emails you can adjust your privacy settings on ${portal_title} by visiting ${consent_url}"
+#: ../browser/overrides/Products.CMFPlone.browser.templates.sendto_template.pt:34
+#: ../browser/overrides/Products.CMFPlone.skins.plone_templates.sendto_template.pt:34
+msgid "email_privacy_info"
+msgstr "Als u deze e-mails liever niet wilt ontvangen, kunt u uw privacyinstellingen aanpassen op ${portal_title} door ${consent_url}"

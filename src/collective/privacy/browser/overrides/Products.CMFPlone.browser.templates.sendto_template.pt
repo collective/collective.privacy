@@ -29,7 +29,7 @@ It is sent by <span i18n:name="from_address" tal:omit-tag="" tal:replace="struct
 
 </div>
 
-<div i18n:translate="email_privacy_info" tal:omit-tag="" tal:define="utool nocall:context/portal_url;">
+<div i18n:domain="collective.privacy" i18n:translate="email_privacy_info" tal:omit-tag="" tal:define="utool nocall:context/portal_url;">
 If you would prefer not to receive these emails you can adjust your privacy settings on <span i18n:name="portal_title" tal:omit-tag="" tal:replace="structure utool/Title" />
 by visiting <span i18n:name="consent_url" tal:omit-tag="" tal:replace="structure python:context.portal_privacy.getConsentLink('send_to_form', options['send_to_address'])" />
 </div>
