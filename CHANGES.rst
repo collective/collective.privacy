@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.0a2 (unreleased)
+1.1.0b1 (2021-08-19)
 --------------------
 
 - Fix translation domain & add translations for custom text in send_to_form email
