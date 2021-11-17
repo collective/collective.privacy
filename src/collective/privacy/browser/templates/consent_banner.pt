@@ -27,6 +27,6 @@
            tal:attributes="href string:${navigation_root_url}/@@consent"
            i18n:translate="">Manage privacy settings</a>
     </div>
-    <script type="text/javascript"
+    <script type="text/javascript" defer="defer"
             tal:attributes="src string:${portal_url}/++resource++collective.privacy/consent.js"></script>
 </div>
