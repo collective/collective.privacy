@@ -4,7 +4,8 @@ Changelog
 1.1.0b2 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Defer the execution of consent.js (#18).
+  [comwes]
 
 
 1.1.0b1 (2021-08-19)
