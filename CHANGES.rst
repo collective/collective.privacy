@@ -4,6 +4,9 @@ Changelog
 1.1.0b2 (unreleased)
 --------------------
 
+- Fix Fixed ModuleNotFoundError: No module named 'App.class_init' on Zope 5.
+  [laulaz]
+
 - Defer the execution of consent.js (#18).
   [comwes]
 

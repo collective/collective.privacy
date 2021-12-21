@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
+from AccessControl.class_init import InitializeClass
 from AccessControl.SecurityInfo import ClassSecurityInfo
-from App.class_init import InitializeClass
 from BTrees.OOBTree import OOBTree
 from collective.privacy.interfaces import IProcessingReason
 from OFS.ObjectManager import IFAwareObjectManager
