@@ -1,15 +1,9 @@
 # -*- coding: utf-8 -*-
 from collective.privacy.tool import ProcessingReason
 
-import pkg_resources
-import time
+from email.utils import formatdate
 
-try:
-    pkg_resources.get_distribution("email.Utils")
-except pkg_resources.DistributionNotFound:
-    from email.utils import formatdate
-else:
-    from email.Utils import formatdate
+import time
 
 
 class BaseStorage(object):

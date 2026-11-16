@@ -21,12 +21,22 @@ from six import text_type
 from six.moves import urllib
 
 import json
-import pkg_resources
 
 
 try:
-    pkg_resources.get_distribution("plone.directives.form")
-except pkg_resources.DistributionNotFound:
+    from importlib.metadata import PackageNotFoundError
+    from importlib.metadata import version as get_version
+except ImportError:  # Python 2.7 and Python 3 < 3.8
+    from pkg_resources import DistributionNotFound as PackageNotFoundError
+    from pkg_resources import get_distribution
+
+    def get_version(name):
+        return get_distribution(name).version
+
+
+try:
+    get_version("plone.directives.form")
+except PackageNotFoundError:
     HAS_DIRECTIVES = False
     from plone.autoform import directives
     from plone.autoform.form import AutoExtensibleForm
