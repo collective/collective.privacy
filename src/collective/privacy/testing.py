@@ -1,12 +1,9 @@
-# -*- coding: utf-8 -*-
 from plone import api
-from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
-from plone.testing import z2
 
 import collective.privacy
 
@@ -35,14 +32,4 @@ COLLECTIVE_PRIVACY_INTEGRATION_TESTING = IntegrationTesting(
 
 COLLECTIVE_PRIVACY_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(COLLECTIVE_PRIVACY_FIXTURE,), name="CollectivePrivacyLayer:FunctionalTesting"
-)
-
-
-COLLECTIVE_PRIVACY_ACCEPTANCE_TESTING = FunctionalTesting(
-    bases=(
-        COLLECTIVE_PRIVACY_FIXTURE,
-        REMOTE_LIBRARY_BUNDLE_FIXTURE,
-        z2.ZSERVER_FIXTURE,
-    ),
-    name="CollectivePrivacyLayer:AcceptanceTesting",
 )
