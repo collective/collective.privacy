@@ -1,62 +1,38 @@
-# -*- coding: utf-8 -*-
-from Products.Five import BrowserView
 from collective.privacy import _
-from collective.privacy.utils import safe_fieldname
 from collective.privacy.interfaces import IConsentFormView
+from collective.privacy.utils import safe_fieldname
 from plone import api
 from plone.app.layout.viewlets import common as base
+from plone.autoform import directives
+from plone.autoform.form import AutoExtensibleForm
+from Products.Five import BrowserView
 from z3c.form import button
-from z3c.form.form import Form
 from z3c.form.browser.radio import RadioFieldWidget
+from z3c.form.form import Form
 from zope import schema
+from zope.component import getMultiAdapter
 from zope.i18n import translate
-from zope.interface import Interface
 from zope.interface import implementer
+from zope.interface import Interface
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-from zope.component import getMultiAdapter
 from zope.traversing.browser.absoluteurl import _safe as SAFE_URL_CHARACTERS
 from zope.traversing.browser.interfaces import IAbsoluteURL
-from six import text_type
-from six.moves import urllib
 
 import json
-
-
-try:
-    from importlib.metadata import PackageNotFoundError
-    from importlib.metadata import version as get_version
-except ImportError:  # Python 2.7 and Python 3 < 3.8
-    from pkg_resources import DistributionNotFound as PackageNotFoundError
-    from pkg_resources import get_distribution
-
-    def get_version(name):
-        return get_distribution(name).version
-
-
-try:
-    get_version("plone.directives.form")
-except PackageNotFoundError:
-    HAS_DIRECTIVES = False
-    from plone.autoform import directives
-    from plone.autoform.form import AutoExtensibleForm
-else:
-    HAS_DIRECTIVES = True
-    from plone.directives import form as directives
-    from plone.directives.form import SchemaForm as AutoExtensibleForm
-
+import urllib.parse
 
 consent_values = SimpleVocabulary(
     [
-        SimpleTerm(value=u"Allowed", title=_(u"Allowed")),
-        SimpleTerm(value=u"Blocked", title=_(u"Blocked")),
+        SimpleTerm(value="Allowed", title=_("Allowed")),
+        SimpleTerm(value="Blocked", title=_("Blocked")),
     ]
 )
 
 
 @implementer(IConsentFormView)
 class ConsentForm(AutoExtensibleForm, Form):
-    """ Define Form handling
+    """Define Form handling
 
     This form can be accessed as http://yoursite/@@consent
 
@@ -64,15 +40,15 @@ class ConsentForm(AutoExtensibleForm, Form):
 
     ignoreContext = True
 
-    label = _(u"Privacy settings")
-    description = _(u"Choose to opt in or out of various pieces of functionality")
+    label = _("Privacy settings")
+    description = _("Choose to opt in or out of various pieces of functionality")
 
     @property
     def action(self):
         return self._action
 
     def url(self, name=None, data=None):
-        """ Partially reimplement url method that came from plone.directives.form
+        """Partially reimplement url method that came from plone.directives.form
         Return string for the URL based on the obj and name. The data
         argument is used to form a CGI query string.
         """
@@ -82,23 +58,23 @@ class ConsentForm(AutoExtensibleForm, Form):
             data = {}
         else:
             if not isinstance(data, dict):
-                raise TypeError('url() data argument must be a dict.')
+                raise TypeError("url() data argument must be a dict.")
 
         url = getMultiAdapter((obj, self.request), IAbsoluteURL)()
         if name is not None:
-            url += '/' + urllib.parse.quote(name.encode('utf-8'), SAFE_URL_CHARACTERS)
+            url += "/" + urllib.parse.quote(name.encode("utf-8"), SAFE_URL_CHARACTERS)
         if not data:
             return url
 
         for k, v in data.items():
-            if isinstance(v, text_type):
-                data[k] = v.encode('utf-8')
+            if isinstance(v, str):
+                data[k] = v.encode("utf-8")
             if isinstance(v, (list, set, tuple)):
                 data[k] = [
-                    isinstance(item, text_type) and item.encode('utf-8')
-                    or item for item in v]
+                    isinstance(item, str) and item.encode("utf-8") or item for item in v
+                ]
 
-        return url + '?' + urllib.parse.urlencode(data, doseq=True)
+        return url + "?" + urllib.parse.urlencode(data, doseq=True)
 
     @property
     def schema(self):
@@ -157,12 +133,14 @@ class ConsentForm(AutoExtensibleForm, Form):
                     description=reason.html_description,
                     vocabulary=consent_values,
                     required=True,
-                    default="Allowed"
-                    if reason.isProcessingAllowed(
-                        self.request,
-                        identifier=validated_user[1] if reason_match else None,
-                    )
-                    else "Blocked",
+                    default=(
+                        "Allowed"
+                        if reason.isProcessingAllowed(
+                            self.request,
+                            identifier=validated_user[1] if reason_match else None,
+                        )
+                        else "Blocked"
+                    ),
                 )
             del lang
             del translated_title
@@ -172,7 +150,7 @@ class ConsentForm(AutoExtensibleForm, Form):
 
         return IConsentForm
 
-    @button.buttonAndHandler(_(u"Ok"))
+    @button.buttonAndHandler(_("Ok"))
     def handleApply(self, action):
         data, errors = self.extractData()
         if errors:
@@ -187,12 +165,11 @@ class ConsentForm(AutoExtensibleForm, Form):
             else:
                 privacy_tool.objectToProcessing(topic)
 
-        self.status = _(u"Your preferences have been saved.")
+        self.status = _("Your preferences have been saved.")
 
-    @button.buttonAndHandler(_(u"Cancel"))
+    @button.buttonAndHandler(_("Cancel"))
     def handleCancel(self, action):
-        """User cancelled. Redirect back to the front page.
-        """
+        """User cancelled. Redirect back to the front page."""
 
 
 class ConsentBannerViewlet(base.ViewletBase):
