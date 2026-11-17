@@ -101,7 +101,7 @@ msgid "Legal basis"
 msgstr "Base légale"
 
 #: ../zcml.py:71
-msgid "List of cookies for this use : separeted by ',', wildcard (*) accepted"
+msgid "List of cookies for this use : separated by ',', wildcard (*) accepted"
 msgstr "Liste des cookies pour cet usage : séparés par des ',', caractère générique (*) accepté"
 
 #: ../browser/templates/consent_banner.pt:26

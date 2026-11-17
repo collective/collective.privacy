@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
 from plone import api
 
 import uuid
 
 
-class CookieIdentifier(object):
+class CookieIdentifier:
     __name__ = "cookie"
 
     @classmethod
     def getIdentifierForCurrentRequest(kls, request):
-        """ It is not possible to get the user's email address from a request"""
+        """It is not possible to get the user's email address from a request"""
         return "current"
 
     @classmethod
@@ -17,13 +16,13 @@ class CookieIdentifier(object):
         return None
 
 
-class EmailIdentifier(object):
+class EmailIdentifier:
     __name__ = "Email"
     NAMESPACE = uuid.UUID("a838b36d-d1d5-477e-8471-c1e2079417cf")
 
     @classmethod
     def getIdentifierForCurrentRequest(kls, request):
-        """ It is not possible to get the user's email address from a request"""
+        """It is not possible to get the user's email address from a request"""
         try:
             if api.portal.get_registry_record("collective.privacy.trust_member_emails"):
                 email = api.user.get_current().getProperty("email")
@@ -42,13 +41,13 @@ class EmailIdentifier(object):
         return uuid.uuid5(kls.NAMESPACE, user).int
 
 
-class IPIdentifier(object):
+class IPIdentifier:
     __name__ = "IP"
     NAMESPACE = uuid.UUID("45865cac-1e4f-46d3-8e3e-1c277db76f3e")
 
     @classmethod
     def get_ip(seklslf, request):
-        """ Extract the client IP address from the HTTP request in a proxy-compatible way.
+        """Extract the client IP address from the HTTP request in a proxy-compatible way.
 
         @return: IP address as a string or None if not available
         """
@@ -65,7 +64,7 @@ class IPIdentifier(object):
 
     @classmethod
     def getIdentifierForCurrentRequest(kls, request):
-        """ It is not possible to get the user's email address from a request"""
+        """It is not possible to get the user's email address from a request"""
         return kls.getIdentifierForUser(kls.get_ip(request))
 
     @classmethod
@@ -74,13 +73,13 @@ class IPIdentifier(object):
         return uuid.uuid5(kls.NAMESPACE, user).int
 
 
-class UserIdentifier(object):
+class UserIdentifier:
     __name__ = "User"
     NAMESPACE = uuid.UUID("9d01c079-a268-4e43-81f7-0eecd4c45316")
 
     @classmethod
     def getIdentifierForCurrentRequest(kls, request):
-        """ It is not possible to get the user's email address from a request"""
+        """It is not possible to get the user's email address from a request"""
         username = api.user.get_current().getUserName()
         if not username:
             return None
@@ -92,12 +91,12 @@ class UserIdentifier(object):
         return uuid.uuid5(kls.NAMESPACE, user).int
 
 
-class NoChoiceIdentifier(object):
+class NoChoiceIdentifier:
     __name__ = "NoChoice"
 
     @classmethod
     def getIdentifierForCurrentRequest(kls, request):
-        """ It is not possible to get the user's email address from a request"""
+        """It is not possible to get the user's email address from a request"""
         return 0
 
     @classmethod

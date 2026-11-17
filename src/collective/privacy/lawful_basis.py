@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-
-
-class LegalBasis(object):
+class LegalBasis:
     def __init__(self, name, can_object, can_delete, can_port, default):
         self.__name__ = name
         self.can_object = can_object

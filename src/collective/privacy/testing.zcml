@@ -1,7 +1,9 @@
-<configure
-    xmlns="http://namespaces.zope.org/zope">
+<configure xmlns="http://namespaces.zope.org/zope">
 
-  <include package="collective.privacy" file="meta.zcml" />
+  <include
+      package="collective.privacy"
+      file="meta.zcml"
+      />
   <include package="collective.privacy" />
 
 </configure>

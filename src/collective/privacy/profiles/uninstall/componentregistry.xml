@@ -1,9 +1,9 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <componentregistry>
   <utilities>
-    <utility
-      remove="True"
-      interface="collective.privacy.interfaces.IPrivacyTool"
-      object="portal_privacy"/>
+    <utility interface="collective.privacy.interfaces.IPrivacyTool"
+             object="portal_privacy"
+             remove="True"
+    />
   </utilities>
 </componentregistry>

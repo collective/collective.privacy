@@ -100,7 +100,7 @@ msgid "Legal basis"
 msgstr "Wettelijke grondslag"
 
 #: ../zcml.py:71
-msgid "List of cookies for this use : separeted by ',', wildcard (*) accepted"
+msgid "List of cookies for this use : separated by ',', wildcard (*) accepted"
 msgstr ""
 
 #: ../browser/templates/consent_banner.pt:26

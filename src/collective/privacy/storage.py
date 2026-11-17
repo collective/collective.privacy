@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
 from collective.privacy.tool import ProcessingReason
-
 from email.utils import formatdate
 
 import time
 
 
-class BaseStorage(object):
+class BaseStorage:
 
     uses_end_user_equipment = False
 
@@ -52,9 +50,9 @@ class CookieStorage(BaseStorage):
         else:
             cookies = self.request.cookies.get("dataprotection", "")
         cookies = cookies.split(":")
-        if "{}|1".format(self.processing_reason.__name__) in cookies:
+        if f"{self.processing_reason.__name__}|1" in cookies:
             return True
-        elif "{}|0".format(self.processing_reason.__name__) in cookies:
+        elif f"{self.processing_reason.__name__}|0" in cookies:
             return False
         else:
             return None
@@ -68,9 +66,9 @@ class CookieStorage(BaseStorage):
         existing_cookies = existing_cookies.split(":")
         existing_cookies = filter(None, existing_cookies)
         existing_cookies = filter(
-            lambda cookie: "{}|".format(topic) not in cookie, existing_cookies
+            lambda cookie: f"{topic}|" not in cookie, existing_cookies
         )
-        new_cookie = "{}|{:d}".format(topic, int(shouldProcess))
+        new_cookie = f"{topic}|{int(shouldProcess):d}"
         cookie = ":".join(list(existing_cookies) + [new_cookie])
         expiration_seconds = time.time() + (60 * 60 * 24 * 365)
         expires = formatdate(expiration_seconds, usegmt=True)

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.privacy import _
 from collective.privacy.interfaces import ILawfulBasis
 from collective.privacy.interfaces import IProcessingReason
@@ -69,7 +68,7 @@ class IDataUseCategory(Interface):
     cookies = TextLine(
         title=_("Cookies names"),
         description=_(
-            "List of cookies for this use : separeted by ',', wildcard (*) accepted"
+            "List of cookies for this use : separated by ',', wildcard (*) accepted"
         ),
         required=False,
     )
@@ -85,7 +84,7 @@ def data_use_category(
     identifier,
     marketing=False,
     tracking=False,
-    cookies=u"",
+    cookies="",
 ):
     _context.action(
         discriminator=("processing_reason", name),
@@ -114,12 +113,12 @@ def register_data_use_category(
     identifier,
     marketing=False,
     tracking=False,
-    cookies=u"",
+    cookies="",
 ):
     manager = getSiteManager()
     legal_basis_obj = manager.queryUtility(ILawfulBasis, name=legal_basis)
     if legal_basis_obj is None:
-        raise ValueError("{} is not a valid lawful basis.".format(legal_basis))
+        raise ValueError(f"{legal_basis} is not a valid lawful basis.")
 
     if marketing and tracking:
         kls = MarketingTrackingProcessingReason

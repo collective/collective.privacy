@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.privacy import _
 from collective.privacy.utils import match_string
 from plone import api
@@ -6,7 +5,7 @@ from zope.component.hooks import getSiteManager
 from zope.i18n import translate
 
 
-class ProcessingReason(object):
+class ProcessingReason:
     def __init__(
         self,
         id,
@@ -35,15 +34,15 @@ class ProcessingReason(object):
         lang = api.portal.get_current_language()
         description = translate(_(self.Description), target_language=lang)
         if self.optinoptout_storage.uses_end_user_equipment:
-            text = _(u"The preference you set here will be stored on your computer.")
+            text = _("The preference you set here will be stored on your computer.")
             translated_text = translate(text, target_language=lang)
-            description += u"<p>{0}<p>".format(translated_text)
+            description += f"<p>{translated_text}<p>"
         if not self.can_object:
             text = _(
-                u"In order to comply with Data Protection laws, we cannot offer the ability to opt out of this."
+                "In order to comply with Data Protection laws, we cannot offer the ability to opt out of this."
             )
             translated_text = translate(text, target_language=lang)
-            description += u"<p><strong>{0}</strong><p>".format(translated_text)
+            description += f"<p><strong>{translated_text}</strong><p>"
         return description
 
     @property
@@ -84,7 +83,7 @@ class ProcessingReason(object):
                         continue
                     request.response.expireCookie(existing_cookie_name, path="/")
         else:
-            raise ValueError("Cannot object to processing {!r}".format(self))
+            raise ValueError(f"Cannot object to processing {self!r}")
 
     def isOpinionExpressed(self, request, identifier=None):
         if identifier is None:
@@ -133,17 +132,13 @@ class TrackingProcessingReason(ProcessingReason):
         if identifier is None:
             if request.headers.get("X-Do-Not-Track"):
                 return True
-        return super(TrackingProcessingReason, self).isOpinionExpressed(
-            request, identifier
-        )
+        return super().isOpinionExpressed(request, identifier)
 
     def isProcessingAllowed(self, request, identifier=None):
         if identifier is None:
             if request.headers.get("X-Do-Not-Track"):
                 return False
-        return super(TrackingProcessingReason, self).isOpinionExpressed(
-            request, identifier
-        )
+        return super().isOpinionExpressed(request, identifier)
 
 
 class MarketingTrackingProcessingReason(

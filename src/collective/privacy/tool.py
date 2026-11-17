@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from AccessControl.class_init import InitializeClass
 from AccessControl.SecurityInfo import ClassSecurityInfo
 from BTrees.OOBTree import OOBTree
@@ -16,7 +15,7 @@ import uuid
 
 class ProcessingReason(SimpleItem):
     def __init__(self, id, *args, **kwargs):
-        super(ProcessingReason, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.id = id
         self.consented = (
             OOBTree()
@@ -34,8 +33,7 @@ InitializeClass(ProcessingReason)
 
 
 class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTool):
-    """ Manage through-the-web signup policies.
-    """
+    """Manage through-the-web signup policies."""
 
     meta_type = "Plone Privacy Tool"
     _product_interfaces = (IProcessingReason,)
@@ -51,15 +49,17 @@ class PrivacyTool(UniqueObject, IFAwareObjectManager, OrderedFolder, PloneBaseTo
         return "portal_privacy"
 
     def __init__(self, *args, **kwargs):
-        super(PrivacyTool, self).__init__(self, *args, **kwargs)
+        super().__init__(self, *args, **kwargs)
         self._signing_secret = uuid.uuid4().hex
 
     @security.private
     def signIdentifier(self, processing_reason_id, user=None):
         processing_reason = self.getProcessingReason(processing_reason_id)
         if user is None:
-            identifier = processing_reason.identifier_factory.getIdentifierForCurrentRequest(
-                self.REQUEST
+            identifier = (
+                processing_reason.identifier_factory.getIdentifierForCurrentRequest(
+                    self.REQUEST
+                )
             )
         else:
             identifier = processing_reason.identifier_factory.getIdentifierForUser(user)
