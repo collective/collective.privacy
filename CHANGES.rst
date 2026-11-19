@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.0 (unreleased)
+2.0.0 (2026-11-19)
 ------------------
 
 - Use ``importlib.metadata`` instead of ``pkg_resources``, which setuptools 81+
