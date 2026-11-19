@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 """Cookies tests for this package."""
+
 from collective.privacy.testing import COLLECTIVE_PRIVACY_INTEGRATION_TESTING
 from zope.globalrequest import getRequest
 
 import unittest
-import re
 
 COOKIES = {"foo1": "foo value", "foo2": "foo value 2", "bar": "bar value"}
 
@@ -19,7 +18,7 @@ class TestCookies(unittest.TestCase):
         self.portal = self.layer["portal"]
 
     def test_expire_data_use_cookies(self):
-        """ Test that cookies for data use expires after user objects """
+        """Test that cookies for data use expires after user objects"""
         consent_reason = [
             reason
             for reason in self.portal.portal_privacy.getAllReasons().values()
@@ -34,9 +33,5 @@ class TestCookies(unittest.TestCase):
             self.assertIn(cookie_name, cookies)
             data = cookies.get(cookie_name)
             self.assertEqual(data["value"], "deleted")
-            self.assertEqual(data["max_age"], 0)
-            # Depending of the version of Plone and Zope, the result differ
-            # Wed, 31 Dec 1997 23:59:59 GMT on Plone 5.2
-            # Wed, 31-Dec-97 23:59:59 GMT before
-            expire_regexp = "Wed, 31( |-)Dec( |-)(1997|97) 23:59:59 GMT"
-            self.assertIsNotNone(re.match(expire_regexp, data["expires"]))
+            self.assertEqual(data["Max-Age"], "0")
+            self.assertEqual(data["Expires"], "Wed, 31 Dec 1997 23:59:59 GMT")

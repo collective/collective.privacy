@@ -1,39 +1,37 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:gdpr="http://namespaces.plone.org/gdpr"
-    i18n_domain="collective.privacy">
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="collective.privacy"
+    >
 
   <gdpr:data_use_category
-    name="send_to_form"
-    title="Allow other users to send content links"
-    description="Other users of the site can choose to share content through
-                 email. You may object to this processing of your email address
-                 to prevent these emails being sent to you by other users."
-    legal_basis="legitimate_interest"
-    identifier="collective.privacy.identifiers.EmailIdentifier"
-    storage="collective.privacy.storage.DatabaseStorage"
-    />
+      name="send_to_form"
+      title="Allow other users to send content links"
+      description="Other users of the site can choose to share content through                  email. You may object to this processing of your email address                  to prevent these emails being sent to you by other users."
+      identifier="collective.privacy.identifiers.EmailIdentifier"
+      legal_basis="legitimate_interest"
+      storage="collective.privacy.storage.DatabaseStorage"
+      />
 
   <gdpr:data_use_category
-    name="basic_analytics"
-    title="Unintrusive analytics"
-    description="Analytics that are used to improve the website without
-                 directly tracking users"
-    legal_basis="legitimate_interest"
-    identifier="collective.privacy.identifiers.CookieIdentifier"
-    storage="collective.privacy.storage.CookieStorage"
-    cookies="_ga,_gat_gtag_*,_gid"
-    />
+      name="basic_analytics"
+      title="Unintrusive analytics"
+      description="Analytics that are used to improve the website without                  directly tracking users"
+      cookies="_ga,_gat_gtag_*,_gid"
+      identifier="collective.privacy.identifiers.CookieIdentifier"
+      legal_basis="legitimate_interest"
+      storage="collective.privacy.storage.CookieStorage"
+      />
 
   <browser:viewlet
-    name="plone.analytics"
-    manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
-    class=".webstats_js.PrivacyRespectingAnalyticsViewlet"
-    layer="collective.privacy.interfaces.ICollectivePrivacyLayer"
-    permission="zope2.View"
-    />
+      name="plone.analytics"
+      manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+      class=".webstats_js.PrivacyRespectingAnalyticsViewlet"
+      permission="zope2.View"
+      layer="collective.privacy.interfaces.ICollectivePrivacyLayer"
+      />
 
   <!--gdpr:data_use_category
     name="enhanced_analytics"
@@ -47,8 +45,8 @@
 
 
   <adapter
-    zcml:condition="have plone-5"
-    factory=".sendto.SendToEmailValidator"
-    />
+      factory=".sendto.SendToEmailValidator"
+      zcml:condition="have plone-5"
+      />
 
 </configure>

@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <tool-setup>
- <forbidden tool_id="portal_privacy"
-
-           class="collective.privacy.tool.PrivacyTool"/>
+  <forbidden class="collective.privacy.tool.PrivacyTool"
+             tool_id="portal_privacy"
+  />
 </tool-setup>

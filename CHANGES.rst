@@ -1,10 +1,35 @@
 Changelog
 =========
 
-1.1.0b3 (unreleased)
---------------------
+2.0.0 (unreleased)
+------------------
 
-- Nothing changed yet.
+- Use ``importlib.metadata`` instead of ``pkg_resources``, which setuptools 81+
+  deprecates and setuptools 84 (Plone 6.2.3) no longer ships.
+  [bsuttor]
+
+- Breaking: migrate to PEP 420 native namespaces (setuptools 81 / Plone 6.2).
+  Support Plone 6.2 only, on Python 3.10 to 3.14, without
+  ``horse-with-no-namespace``: older Plone and Python releases are dropped
+  (use 1.1.0b2).
+  [bsuttor]
+
+- Move the package metadata from ``setup.py`` to ``pyproject.toml``, configure
+  the package with plone.meta (tox, GitHub Actions, pre-commit) and replace the
+  buildout development environment by a uv one on Plone 6.2.3. Remove the
+  Travis, GitLab CI and buildout files, and the Selenium robot tests, which
+  can't run on plone.app.robotframework 3.
+  [bsuttor]
+
+- Import ``INonInstallable``, ``safe_text`` and ``get_installer`` from
+  ``plone.base``, drop ``six``, the ``plone.directives.form`` fallback and the
+  jbot overrides of Plone 4 skin templates. Declare the dependencies the code
+  imports.
+  [bsuttor]
+
+- Fix the setup and cookie tests for Plone 6, and test the consent form and
+  the ``@@consent-json`` view.
+  [bsuttor]
 
 
 1.1.0b2 (2022-01-07)
@@ -46,7 +71,7 @@ Changelog
 1.1.0a1 (2020-05-12)
 --------------------
 
-- Add Python 3 and Plone 5.2 compatbility
+- Add Python 3 and Plone 5.2 compatibility
   [mpeeters]
 
 

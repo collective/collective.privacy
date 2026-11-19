@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <layers>
-  <layer
-      name="collective.privacy"
-      interface="collective.privacy.interfaces.ICollectivePrivacyLayer"
-      />
+  <layer interface="collective.privacy.interfaces.ICollectivePrivacyLayer"
+         name="collective.privacy"
+  />
 </layers>
