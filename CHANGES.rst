@@ -9,8 +9,9 @@ Changelog
   [bsuttor]
 
 - Breaking: migrate to PEP 420 native namespaces (setuptools 81 / Plone 6.2).
-  Support Plone 6.1 and 6.2 on Python 3.10 to 3.13 only: older Plone and
-  Python releases are dropped (use 1.1.0b2).
+  Support Plone 6.2 only, on Python 3.10 to 3.14, without
+  ``horse-with-no-namespace``: older Plone and Python releases are dropped
+  (use 1.1.0b2).
   [bsuttor]
 
 - Move the package metadata from ``setup.py`` to ``pyproject.toml``, configure
