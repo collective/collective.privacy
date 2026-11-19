@@ -10,7 +10,7 @@ requires = ["setuptools>=68.2,<83", "wheel"]
 
 [project]
 name = "collective.privacy"
-version = "2.0.0"
+version = "2.0.1.dev0"
 description = "An add-on for Plone that provides functionality for better complying with the EU's General Data Protection Regulations and ePrivacy Regulations"
 classifiers = [
     "Development Status :: 4 - Beta",
